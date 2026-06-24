@@ -26,9 +26,10 @@
   bottom: 0;
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.2) 0%,
-    rgba(0, 0, 0, 0.1) 40%,
-    rgba(13, 20, 15, 0.8) 100%
+    rgba(0, 0, 0, 0.25) 0%,
+    rgba(0, 0, 0, 0.05) 50%,
+    rgba(13, 20, 15, 0.85) 85%,
+    rgba(13, 20, 15, 1) 100%
   );
   z-index: 1;
   pointer-events: none;
@@ -41,9 +42,10 @@
 
 .bottomSection {
   margin-top: auto;
-  padding: 0 64px 64px;
-  max-width: 1400px;
+  padding: 0 48px 80px;
+  max-width: 100%;
   width: 100%;
   margin-left: auto;
   margin-right: auto;
+  box-sizing: border-box;
 }

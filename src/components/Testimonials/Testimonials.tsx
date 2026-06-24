@@ -5,17 +5,20 @@ const testimonialList = [
   {
     name: 'Bessie Cooper',
     image: '/images/testimonial_bessie.png',
-    quote: '“ Professional service and pricing The car condition was excellent customer support was very responsive. ”'
+    quote: '“ Professional service and pricing The car condition was excellent customer support was very responsive. ”',
+    company: 'CEO, Cooper Tech'
   },
   {
     name: 'Devon Lane',
     image: '/images/testimonial_devon.png',
-    quote: '“ Professional service and pricing The car condition was excellent customer support was very responsive. ”'
+    quote: '“ Professional service and pricing The car condition was excellent customer support was very responsive. ”',
+    company: 'Founder, Lane Agency'
   },
   {
     name: 'Leslie Alexander',
     image: '/images/testimonial_leslie.png',
-    quote: '“ Professional service and pricing The car condition was excellent customer support was very responsive. ”'
+    quote: '“ Professional service and pricing The car condition was excellent customer support was very responsive. ”',
+    company: 'Director, Alexander Co.'
   }
 ];
 
@@ -66,8 +69,11 @@ export default function Testimonials() {
                 {/* Quote */}
                 <p className={styles.quote}>{item.quote}</p>
                 
-                {/* Customer name */}
-                <h3 className={styles.name}>{item.name}</h3>
+                {/* Customer name & company */}
+                <div>
+                  <h3 className={styles.name}>{item.name}</h3>
+                  <span className={styles.company}>{item.company}</span>
+                </div>
               </div>
             </div>
           ))}

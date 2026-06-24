@@ -65,12 +65,6 @@ export default function Services() {
         
         {/* Header */}
         <div className={styles.header}>
-          <div className={styles.logoIcon}>
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2L2 7l1 15 9 5 9-5 1-15-10-5zm0 2.5l7 3.5-.6 11-6.4 3.5-6.4-3.5-.6-11 7-3.5z" fill="var(--dark-green)"/>
-              <path d="M12 9c-1.6 0-3 1.4-3 3s1.4 3 3 3 3-1.4 3-3-1.4-3-3-3zm0 4.5c-.8 0-1.5-.7-1.5-1.5S11.2 10.5 12 10.5 13.5 11.2 13.5 12 12.8 13.5 12 13.5z" fill="var(--primary-green)"/>
-            </svg>
-          </div>
           <div className={styles.subtitleWrapper}>
             <span className={styles.line}></span>
             <h4 className={styles.subtitle}>Services of Greenline</h4>
