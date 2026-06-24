@@ -1,0 +1,95 @@
+.searchBarContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #252525;
+  border-radius: 20px;
+  padding: 36px 36px 36px 48px;
+  max-width: 100%;
+  margin: 24px auto 0;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.titleSection {
+  padding-right: 16px;
+  flex-shrink: 0;
+}
+
+.titleSection h3 {
+  color: #fff;
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.divider {
+  width: 1px;
+  height: 64px;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 24px;
+  flex: 1;
+  min-width: 0;
+}
+
+.inputGroup label {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.input {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  padding: 0;
+  outline: none;
+  font-family: inherit;
+  font-weight: 400;
+  width: 100%;
+  min-width: 0;
+}
+
+.input::placeholder {
+  color: #777;
+}
+
+.dateInputWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.calendarIcon {
+  color: rgba(255, 255, 255, 0.5);
+  flex-shrink: 0;
+}
+
+.sendBtn {
+  background-color: var(--primary-green, #BEEB42);
+  color: #0D140F;
+  padding: 18px 44px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  margin-left: 16px;
+  flex-shrink: 0;
+}
+
+.sendBtn:hover {
+  opacity: 0.95;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(190, 235, 66, 0.25);
+}
