@@ -361,7 +361,7 @@
 /* Responsive styles */
 @media (max-width: 1100px) {
   .container {
-    flex-direction: column;
+    flex-direction: column-reverse;
     gap: 48px;
   }
 }
@@ -371,28 +371,161 @@
     padding: 60px 24px;
   }
   .heading {
-    font-size: 40px;
+    font-size: 34px;
+    letter-spacing: -1px;
+  }
+  .description {
+    font-size: 15px;
+    margin-bottom: 24px;
   }
   .featuresGrid {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 16px;
+  }
+  .featureText h4 {
+    font-size: 16px;
+  }
+  .featureText p {
+    font-size: 13px;
+  }
+  .iconCircle {
+    width: 48px;
+    height: 48px;
   }
   .statsPanel {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-    padding: 24px 16px;
+    display: none;
   }
-  .statCardItem:not(:last-child)::after {
+  .wavyDivider {
     display: none;
   }
   .testimonialCard {
     flex-direction: column;
     text-align: center;
     padding: 20px;
+    gap: 16px;
+  }
+  .avatar {
+    width: 56px;
+    height: 56px;
+  }
+  .quoteText {
+    font-size: 13.5px;
+    margin-bottom: 8px;
   }
   .testimonialMeta {
     flex-direction: column;
     align-items: center;
     gap: 12px;
   }
+  .authorInfo h4 {
+    font-size: 14px;
+  }
+  .authorInfo p {
+    font-size: 11px;
+  }
+  .signature {
+    font-size: 28px;
+  }
+  .imageArea {
+    height: 340px;
+  }
+  .gaugeContainer {
+    width: 240px;
+    height: 120px;
+    top: 24px;
+  }
+  .gaugeSubtitle {
+    font-size: 18px;
+  }
+  .gaugeTitle {
+    font-size: 12px;
+  }
 }
+
+@media (max-width: 480px) {
+  .aboutSection {
+    padding: 48px 16px;
+  }
+  .badge {
+    font-size: 11px;
+    margin-bottom: 12px;
+    padding: 4px 10px;
+  }
+  .heading {
+    font-size: 26px;
+    line-height: 1.25;
+  }
+  .accentLine {
+    height: 3px;
+    margin-bottom: 16px;
+  }
+  .description {
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  .featuresGrid {
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .featureCard {
+    gap: 12px;
+  }
+  .iconCircle {
+    width: 40px;
+    height: 40px;
+  }
+  .iconCircle svg {
+    width: 20px;
+    height: 20px;
+  }
+  .featureText h4 {
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+  .featureText p {
+    font-size: 12.5px;
+  }
+  .testimonialCard {
+    padding: 16px;
+    gap: 12px;
+  }
+  .avatar {
+    width: 48px;
+    height: 48px;
+  }
+  .quoteSymbol {
+    font-size: 30px;
+    margin-bottom: -10px;
+    margin-top: -5px;
+  }
+  .quoteText {
+    font-size: 12.5px;
+    line-height: 1.45;
+    margin-bottom: 8px;
+  }
+  .authorInfo h4 {
+    font-size: 13px;
+  }
+  .authorInfo p {
+    font-size: 11px;
+  }
+  .signature {
+    font-size: 24px;
+  }
+  .statsPanel {
+    display: none;
+  }
+  .wavyDivider {
+    display: none;
+  }
+  .imageArea {
+    height: 260px;
+  }
+  .gaugeContainer {
+    width: 200px;
+    height: 100px;
+    top: 16px;
+  }
+}
+

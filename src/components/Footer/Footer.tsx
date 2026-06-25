@@ -62,7 +62,7 @@ export default function Footer() {
           </div>
           
           {/* Column 2: Quick Links */}
-          <div>
+          <div className={styles.linksColumn}>
             <div className={styles.columnHeader}>
               <div className={styles.headerIconCircle}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -84,7 +84,7 @@ export default function Footer() {
           </div>
           
           {/* Column 3: Our Services */}
-          <div>
+          <div className={styles.servicesColumn}>
             <div className={styles.columnHeader}>
               <div className={styles.headerIconCircle}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -108,7 +108,7 @@ export default function Footer() {
           </div>
           
           {/* Column 4: Contact Info */}
-          <div>
+          <div className={styles.contactColumn}>
             <div className={styles.columnHeader}>
               <div className={styles.headerIconCircle}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -155,81 +155,6 @@ export default function Footer() {
             </ul>
           </div>
           
-        </div>
-
-        {/* Bottom Trust Banner Row */}
-        <div className={styles.trustBanner}>
-          <div className={styles.bannerLeft}>
-            <div className={styles.bannerShield}>
-              <div className={styles.bannerShieldInner}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                </svg>
-              </div>
-            </div>
-            <div className={styles.bannerLeftText}>
-              <h4>Your Journey, <span className={styles.bannerLeftTextHighlight}>Our Priority</span></h4>
-              <p>Safe rides, professional chauffeurs and 24/7 customer support.</p>
-            </div>
-          </div>
-          
-          {/* Divider and stats */}
-          <div className={styles.bannerItem}>
-            <div className={styles.bannerIconWrapper}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                <circle cx="9" cy="7" r="4"></circle>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-              </svg>
-            </div>
-            <div className={styles.bannerValue}>
-              <h4>5K+</h4>
-              <p>Happy Riders</p>
-            </div>
-          </div>
-
-          <div className={styles.bannerItem}>
-            <div className={styles.bannerIconWrapper}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"></path>
-                <circle cx="7" cy="17" r="2"></circle>
-                <path d="M9 17h6"></path>
-                <circle cx="17" cy="17" r="2"></circle>
-              </svg>
-            </div>
-            <div className={styles.bannerValue}>
-              <h4>50+</h4>
-              <p>Fleet Vehicles</p>
-            </div>
-          </div>
-
-          <div className={styles.bannerItem}>
-            <div className={styles.bannerIconWrapper}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
-                <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
-              </svg>
-            </div>
-            <div className={styles.bannerValue}>
-              <h4>24/7</h4>
-              <p>Support</p>
-            </div>
-          </div>
-
-          <div className={styles.bannerItem}>
-            <div className={styles.bannerIconWrapper}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="8" r="7"></circle>
-                <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
-              </svg>
-            </div>
-            <div className={styles.bannerValue}>
-              <h4>100%</h4>
-              <p>Satisfaction</p>
-            </div>
-          </div>
-
         </div>
 
         {/* Copyright and Credits Bar */}

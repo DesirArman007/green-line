@@ -16,9 +16,6 @@ export default function Hero() {
           <button className="btn-primary">
             <span>&rarr;</span> Reserve Your Car
           </button>
-          <button className="btn-outline">
-            <span className={styles.playIcon}>&#9658;</span> Watch Video
-          </button>
         </div>
       </div>
     </div>

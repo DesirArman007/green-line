@@ -57,7 +57,7 @@
 .track {
   display: flex;
   width: max-content;
-  animation: scroll 35s linear infinite;
+  animation: scroll 60s linear infinite;
   gap: 20px;
   padding-left: 20px;
 }
@@ -79,6 +79,7 @@
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   cursor: default;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+  height: 52px;
 }
 
 .logoCard:hover {
@@ -89,19 +90,27 @@
 }
 
 .logoIcon {
-  height: 20px;
+  height: 24px;
   width: auto;
-  max-width: 80px;
+  max-width: 90px;
   object-fit: contain;
-  filter: grayscale(100%) opacity(0.65);
   color: var(--dark-green, #4C7A34);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   flex-shrink: 0;
 }
 
+.marutiLogo {
+  height: 30px;
+  max-width: 120px;
+}
+
+.tcsLogo {
+  height: 30px;
+  max-width: 120px;
+}
+
 .logoCard:hover .logoIcon {
   color: var(--primary-green, #BEEB42);
-  filter: grayscale(0%) opacity(1);
   transform: scale(1.08);
   filter: drop-shadow(0 0 2px rgba(76, 122, 52, 0.15));
 }
@@ -124,5 +133,48 @@
   }
   100% {
     transform: translateX(-50%);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .marqueeSection {
+    padding: 20px 0;
+  }
+  .label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+  .logoCard {
+    padding: 10px 18px;
+    gap: 10px;
+  }
+  .name {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .marqueeSection {
+    padding: 16px 0;
+  }
+  .logoCard {
+    padding: 8px 14px;
+    gap: 8px;
+    height: 38px;
+  }
+  .name {
+    font-size: 12px;
+  }
+  .logoIcon {
+    height: 18px;
+  }
+  .marutiLogo {
+    height: 22px;
+  }
+  .tcsLogo {
+    height: 22px;
+    max-width: 95px;
   }
 }

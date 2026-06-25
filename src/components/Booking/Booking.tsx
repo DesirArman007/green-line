@@ -54,12 +54,6 @@ export default function Booking() {
           {/* Left Column: Form Card */}
           <div className={styles.formCard}>
             <div className={styles.formHeader}>
-              <div className={styles.planeCircle}>
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="22" y1="2" x2="11" y2="13"></line>
-                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                </svg>
-              </div>
               <h3 className={styles.formTitle}>
                 Book Your <span className={styles.formTitleGreen}>Ride</span>
               </h3>
@@ -170,7 +164,7 @@ export default function Booking() {
               <div className={`${styles.fieldGroup} ${styles.fullWidthField}`}>
                 <label className={styles.fieldLabel}>Message / Itinerary Details</label>
                 <div className={styles.inputWrapper}>
-                  <span className={styles.inputIcon} style={{ alignItems: 'flex-start', paddingTop: '14px' }}>
+                  <span className={styles.inputIcon} style={{ top: '14px', alignItems: 'flex-start', paddingTop: '14px' }}>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                       <polyline points="14 2 14 8 20 8"></polyline>
@@ -182,7 +176,11 @@ export default function Booking() {
                   <textarea 
                     name="message" 
                     value={formData.message} 
-                    onChange={handleChange} 
+                    onChange={(e) => {
+                      handleChange(e);
+                      e.target.style.height = 'auto';
+                      e.target.style.height = `${e.target.scrollHeight}px`;
+                    }} 
                     placeholder="Tell us about your travel plans, destinations, dates..."
                   />
                 </div>

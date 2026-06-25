@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import { motion } from 'framer-motion';
 import styles from './Contact.module.css';
 
 export default function Contact() {
@@ -28,11 +29,34 @@ export default function Contact() {
         {/* Middle spacer to let the background roadmap graphic show through */}
         <div className={styles.spacer} />
 
-        {/* Contact Cards Grid */}
-        <div className={styles.cardsGrid}>
+        {/* Contact Cards Grid with Framer Motion Staggered entrance */}
+        <motion.div 
+          className={styles.cardsGrid}
+          variants={{
+            hidden: { opacity: 0 },
+            show: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.12
+              }
+            }
+          }}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-60px" }}
+        >
           
           {/* Card 1: Our Location */}
-          <a href="https://maps.app.goo.gl/nsXXjwKXTdx1Hbq57" target="_blank" rel="noopener noreferrer" className={styles.contactCard}>
+          <motion.a 
+            href="https://maps.app.goo.gl/nsXXjwKXTdx1Hbq57" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className={styles.contactCard}
+            variants={{
+              hidden: { y: 24, opacity: 0 },
+              show: { y: 0, opacity: 1, transition: { type: 'spring', stiffness: 80, damping: 14 } }
+            }}
+          >
             <div className={styles.cardLeft}>
               <div className={styles.iconWrapper}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -51,10 +75,19 @@ export default function Contact() {
                 <polyline points="9 18 15 12 9 6" />
               </svg>
             </div>
-          </a>
+          </motion.a>
 
           {/* Card 2: Whatsapp */}
-          <a href="https://wa.me/918282825442" target="_blank" rel="noopener noreferrer" className={styles.contactCard}>
+          <motion.a 
+            href="https://wa.me/918282825442" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className={styles.contactCard}
+            variants={{
+              hidden: { y: 24, opacity: 0 },
+              show: { y: 0, opacity: 1, transition: { type: 'spring', stiffness: 80, damping: 14 } }
+            }}
+          >
             <div className={styles.cardLeft}>
               <div className={styles.iconWrapper}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -72,10 +105,17 @@ export default function Contact() {
                 <polyline points="9 18 15 12 9 6" />
               </svg>
             </div>
-          </a>
+          </motion.a>
 
           {/* Card 3: Email Us */}
-          <a href="mailto:contact@greenlinecaartravels.in" className={styles.contactCard}>
+          <motion.a 
+            href="mailto:contact@greenlinecaartravels.in" 
+            className={styles.contactCard}
+            variants={{
+              hidden: { y: 24, opacity: 0 },
+              show: { y: 0, opacity: 1, transition: { type: 'spring', stiffness: 80, damping: 14 } }
+            }}
+          >
             <div className={styles.cardLeft}>
               <div className={styles.iconWrapper}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -94,10 +134,16 @@ export default function Contact() {
                 <polyline points="9 18 15 12 9 6" />
               </svg>
             </div>
-          </a>
+          </motion.a>
 
           {/* Card 4: Availability */}
-          <div className={styles.contactCard}>
+          <motion.div 
+            className={styles.contactCard}
+            variants={{
+              hidden: { y: 24, opacity: 0 },
+              show: { y: 0, opacity: 1, transition: { type: 'spring', stiffness: 80, damping: 14 } }
+            }}
+          >
             <div className={styles.cardLeft}>
               <div className={styles.iconWrapper}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -116,9 +162,9 @@ export default function Contact() {
                 <polyline points="9 18 15 12 9 6" />
               </svg>
             </div>
-          </div>
+          </motion.div>
 
-        </div>
+        </motion.div>
 
       </div>
 

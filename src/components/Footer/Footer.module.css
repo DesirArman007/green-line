@@ -223,6 +223,12 @@
   text-decoration: none;
 }
 
+.contactItem span:last-child {
+  min-width: 0;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
 .contactItem:hover {
   color: #ffffff;
 }
@@ -233,108 +239,6 @@
   margin-top: 2px;
   display: flex;
   align-items: center;
-}
-
-/* Bottom Banner Card */
-.trustBanner {
-  background-color: rgba(255, 255, 255, 0.01);
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  border-radius: 24px;
-  padding: 32px 40px;
-  display: grid;
-  grid-template-columns: 1.3fr 0.9fr 0.9fr 0.9fr 1fr;
-  gap: 20px;
-  align-items: center;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-}
-
-.bannerLeft {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.bannerShield {
-  width: 54px;
-  height: 54px;
-  border-radius: 50%;
-  border: 1.5px dashed rgba(190, 235, 66, 0.35);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--primary-green, #BEEB42);
-  flex-shrink: 0;
-}
-
-.bannerShieldInner {
-  width: 38px;
-  height: 38px;
-  background-color: var(--primary-green, #BEEB42);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #0D140F;
-}
-
-.bannerLeftText h4 {
-  font-size: 17px;
-  font-weight: 800;
-  color: #ffffff;
-  margin: 0 0 2px 0;
-}
-
-.bannerLeftTextHighlight {
-  color: var(--primary-green, #BEEB42);
-}
-
-.bannerLeftText p {
-  font-size: 11px;
-  color: #666666;
-  margin: 0;
-  line-height: 1.35;
-  font-weight: 500;
-}
-
-.bannerItem {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.bannerItem:not(:last-child) {
-  border-right: 1px solid rgba(255, 255, 255, 0.05);
-  padding-right: 12px;
-}
-
-.bannerIconWrapper {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.02);
-  color: var(--primary-green, #BEEB42);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  border: 1px solid rgba(255, 255, 255, 0.04);
-}
-
-.bannerValue h4 {
-  font-size: 20px;
-  font-weight: 800;
-  color: #ffffff;
-  margin: 0 0 1px 0;
-  letter-spacing: -0.5px;
-}
-
-.bannerValue p {
-  font-size: 9px;
-  color: #666666;
-  font-weight: 700;
-  margin: 0;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
 }
 
 /* Bottom Bar (Copyright) */
@@ -367,29 +271,22 @@
 @media (max-width: 1024px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      "brand contact"
+      "quick services";
     gap: 40px;
   }
-  
-  .trustBanner {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 24px;
+  .brandColumn {
+    grid-area: brand;
   }
-
-  .bannerItem:not(:last-child) {
-    border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    padding-right: 0;
-    padding-bottom: 16px;
-    justify-content: flex-start;
+  .linksColumn {
+    grid-area: quick;
   }
-  
-  .bannerItem {
-    justify-content: flex-start;
+  .servicesColumn {
+    grid-area: services;
   }
-  
-  .bannerLeftText p {
-    max-width: 100%;
+  .contactColumn {
+    grid-area: contact;
   }
 }
 
@@ -401,13 +298,43 @@
 
 @media (max-width: 580px) {
   .grid {
-    grid-template-columns: 1fr;
-    gap: 32px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      "brand brand"
+      "quick services"
+      "contact contact";
+    column-gap: 24px;
+    row-gap: 32px;
   }
   
   .bottomBar {
     flex-direction: column;
     gap: 12px;
     text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 48px 16px 24px;
+  }
+  .container {
+    gap: 36px;
+  }
+  .grid {
+    column-gap: 16px;
+  }
+  .brandDesc {
+    font-size: 12.5px;
+    max-width: 100%;
+  }
+  .columnHeader h4 {
+    font-size: 14px;
+  }
+  .linkItem {
+    font-size: 12.5px;
+  }
+  .contactItem {
+    font-size: 12.5px;
   }
 }

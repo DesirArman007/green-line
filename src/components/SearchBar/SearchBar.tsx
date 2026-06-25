@@ -6,7 +6,7 @@ export default function SearchBar() {
     <div className={styles.searchBarContainer}>
       
       <div className={styles.titleSection}>
-        <h3>Need to Rent a<br/>Luxury Car?</h3>
+        <h3>Need to Rent a <br className={styles.desktopBr} />Luxury Car?</h3>
       </div>
 
       <div className={styles.divider}></div>

@@ -6,6 +6,7 @@ import About from '@/components/About/About';
 import Services from '@/components/Services/Services';
 import Fleet from '@/components/Fleet/Fleet';
 import Testimonials from '@/components/Testimonials/Testimonials';
+import VideoTestimonials from '@/components/VideoTestimonials/VideoTestimonials';
 import Contact from '@/components/Contact/Contact';
 import Booking from '@/components/Booking/Booking';
 import Footer from '@/components/Footer/Footer';
@@ -29,6 +30,7 @@ export default function Home() {
       <Services />
       <Fleet />
       <Testimonials />
+      <VideoTestimonials />
       <Contact />
       <Booking />
       <Footer />

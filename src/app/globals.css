@@ -78,3 +78,21 @@ button {
 .btn-outline:hover {
   background-color: var(--glass-bg);
 }
+
+/* Responsive Utilities */
+@media (max-width: 768px) {
+  .btn-primary,
+  .btn-outline {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn-primary,
+  .btn-outline {
+    padding: 10px 18px;
+    font-size: 13px;
+    gap: 6px;
+  }
+}

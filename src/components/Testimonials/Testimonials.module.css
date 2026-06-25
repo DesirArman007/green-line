@@ -1,11 +1,11 @@
 .testimonialsSection {
   background-color: #F6FBF4; /* Theme matching soft green/white */
-  padding: 100px 64px;
+  padding: 60px 48px;
   color: #111111;
   position: relative;
   overflow: hidden;
   border-radius: 40px;
-  margin: 24px 24px; /* Matches Services and Fleet outer container styling */
+  margin: 24px 24px;
 }
 
 /* Ambient green theme light */
@@ -46,12 +46,13 @@
   gap: 8px;
   padding: 6px 16px;
   border-radius: 30px;
-  background-color: #E2EDB3; /* Theme matching badge green */
-  color: var(--dark-green, #4C7A34); /* Theme matching text green */
-  font-size: 12px;
+  background-color: #F1F6DD;
+  border: 1px solid rgba(76, 122, 52, 0.08);
+  color: var(--dark-green, #4C7A34);
+  font-size: 13px;
   font-weight: 700;
-  margin-bottom: 24px;
-  letter-spacing: 1px;
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
 }
 
 .badgeDot {
@@ -62,13 +63,14 @@
 }
 
 .heading {
-  font-size: 48px;
+  font-size: 32px;
   font-weight: 800;
-  line-height: 1.2;
-  color: #1A2315;
-  max-width: 800px;
-  letter-spacing: -1.5px;
+  line-height: 1.25;
+  color: #111111;
+  max-width: 600px;
+  letter-spacing: -0.8px;
   margin: 0;
+  text-align: center;
 }
 
 .highlight {
@@ -81,37 +83,123 @@
 .highlight::after {
   content: '';
   position: absolute;
-  bottom: 6px;
+  bottom: 2px;
   left: 0;
   width: 100%;
   height: 8px;
-  background-color: rgba(190, 235, 66, 0.4);
+  background-color: var(--primary-green, #BEEB42);
   z-index: -1;
   border-radius: 2px;
 }
 
-.leftDotWrapper {
+/* Desktop Grid Layout (Visible on desktop) */
+.desktopGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
   width: 100%;
   max-width: 1400px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.leftDotWrapper {
+  width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
   display: flex;
   justify-content: flex-start;
   padding-left: 8px;
+  box-sizing: border-box;
 }
 
 .decorativeDot {
   width: 10px;
   height: 10px;
-  background-color: var(--dark-green, #4C7A34); /* Theme matching dot color */
+  background-color: var(--dark-green, #4C7A34);
   border-radius: 50%;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
+.sliderWrapper {
+  position: relative;
   width: 100%;
+  max-width: 460px; /* Made slider slightly narrower to match vertical aspect ratio of screenshot */
+  margin: 0 auto;
+  display: none; /* Hidden by default on desktop */
+  align-items: center;
+  justify-content: center;
+}
+
+.sliderViewport {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+}
+
+.activeSlide {
+  width: 100%;
+}
+
+.navBtn {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  color: var(--dark-green, #4C7A34);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.navBtn:hover {
+  background: var(--dark-green, #4C7A34);
+  color: #ffffff;
+  border-color: var(--dark-green, #4C7A34);
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(76, 122, 52, 0.12);
+}
+
+.prevBtn {
+  position: absolute;
+  left: -20px;
+}
+
+.nextBtn {
+  position: absolute;
+  right: -20px;
+}
+
+.dotsContainer {
+  display: none; /* Hidden by default on desktop */
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(76, 122, 52, 0.2);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.dotActive {
+  background-color: var(--dark-green, #4C7A34);
+  width: 20px;
+  border-radius: 4px;
 }
 
 .card {
@@ -168,6 +256,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  text-align: left;
 }
 
 .stars {
@@ -176,7 +265,7 @@
 }
 
 .star {
-  color: var(--primary-green, #BEEB42); /* Theme matching green stars */
+  color: var(--primary-green, #BEEB42);
   font-size: 16px;
   letter-spacing: 2px;
 }
@@ -193,6 +282,7 @@
 .name {
   font-size: 24px;
   font-weight: 700;
+  color: #ffffff;
   margin: 0;
   letter-spacing: -0.5px;
 }
@@ -206,32 +296,71 @@
 }
 
 /* Responsiveness */
-@media (max-width: 1100px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
+@media (max-width: 1024px) {
+  .desktopGrid {
+    display: none;
+  }
+
+  .leftDotWrapper {
+    display: none;
+  }
+
+  .sliderWrapper {
+    display: flex;
+  }
+
+  .dotsContainer {
+    display: flex;
   }
 }
 
 @media (max-width: 768px) {
   .testimonialsSection {
-    padding: 80px 24px;
+    padding: 40px 24px;
     margin: 16px 16px;
   }
   
   .heading {
-    font-size: 36px;
+    font-size: 26px;
   }
-  
-  .grid {
-    grid-template-columns: 1fr;
-    gap: 24px;
+
+  .sliderWrapper {
+    max-width: 100%;
   }
 
   .card {
-    height: 500px;
+    height: 440px;
   }
 
   .cardContent {
-    padding: 30px;
+    padding: 24px;
+  }
+
+  .navBtn {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .testimonialsSection {
+    padding: 32px 16px;
+    margin: 8px 8px;
+    border-radius: 20px;
+  }
+  .heading {
+    font-size: 22px;
+  }
+  .card {
+    height: 400px;
+  }
+  .cardContent {
+    padding: 20px;
+    gap: 10px;
+  }
+  .quote {
+    font-size: 13.5px;
+  }
+  .name {
+    font-size: 16px;
   }
 }

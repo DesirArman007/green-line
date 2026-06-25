@@ -44,6 +44,10 @@
   z-index: 2;
 }
 
+.mobileView {
+  display: none;
+}
+
 /* Header */
 .header {
   text-align: center;
@@ -302,20 +306,387 @@
 }
 
 /* Responsive Media Queries */
-@media (max-width: 768px) {
-  .horizontalNav {
-    gap: 16px 20px;
-    margin-bottom: 24px;
+@media (max-width: 1024px) {
+  .servicesSection {
+    padding: 40px 32px 36px;
+    margin: 16px 16px;
+    border-radius: 24px;
   }
-  .navItem {
-    font-size: 14px;
-    padding: 8px 2px;
+
+  .title {
+    font-size: 36px;
   }
-  .descriptionBlock {
-    margin-bottom: 36px;
-    min-height: 120px; /* slightly taller min-height for wrapped text */
+
+  .desktopView {
+    display: none;
   }
-  .descriptionText {
-    font-size: 14px;
+
+  .mobileView {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
+
+  .businessTravelBanner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  .mBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--dark-green, #4C7A34);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+
+  .mBadgeLine {
+    width: 20px;
+    height: 1px;
+    background-color: rgba(76, 122, 52, 0.2);
+  }
+
+  .mBadgeIcon {
+    color: var(--dark-green, #4C7A34);
+    display: flex;
+    align-items: center;
+  }
+
+  .mBadgeText {
+    letter-spacing: 2px;
+  }
+
+  .mMainTitle {
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1.25;
+    color: #1A2315;
+    margin: 0 0 12px 0;
+    text-align: center;
+  }
+
+  .mGreenText {
+    color: var(--dark-green, #4C7A34);
+  }
+
+  .mSubDesc {
+    font-size: 13.5px;
+    color: #555555;
+    line-height: 1.5;
+    font-weight: 500;
+    text-align: center;
+    max-width: 580px;
+    margin: 0 auto 32px auto;
+  }
+
+  .mShowcaseRow {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .mFeaturesList {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1.1;
+    text-align: left;
+    box-sizing: border-box;
+  }
+
+  .mFeatureItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .mFeatureIconBox {
+    width: 36px;
+    height: 36px;
+    background-color: #1A3015;
+    color: #ffffff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .mFeatureTextBox h4 {
+    font-size: 13.5px;
+    font-weight: 750;
+    color: #111111;
+    margin: 0 0 2px 0;
+  }
+
+  .mFeatureTextBox p {
+    font-size: 11.5px;
+    color: #666666;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .mImageContainer {
+    position: relative;
+    flex: 0.9;
+    width: 100%;
+    max-width: 400px;
+    height: 320px;
+    border-radius: 160px 160px 24px 24px;
+    overflow: hidden;
+    margin: 8px 0;
+    border: 8px solid #ffffff;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    box-sizing: border-box;
+  }
+
+  .mImageContainer::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    border: 4px solid var(--primary-green, #BEEB42);
+    border-bottom: none;
+    border-radius: 142px 142px 0 0;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  .mShowcaseImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .mSectionDivider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 48px 0 28px 0;
+    width: 100%;
+  }
+
+  .mDividerLine {
+    height: 1px;
+    flex-grow: 1;
+    background-color: rgba(76, 122, 52, 0.2);
+    max-width: 100px;
+  }
+
+  .mDividerText {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--dark-green, #4C7A34);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  .mServicesGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+    box-sizing: border-box;
   }
 }
+
+@media (max-width: 768px) {
+  .servicesSection {
+    padding: 36px 20px 32px;
+    margin: 12px 12px;
+    border-radius: 24px;
+  }
+
+  .mMainTitle {
+    font-size: 28px;
+  }
+
+  .mShowcaseRow {
+    flex-direction: column-reverse;
+    gap: 24px;
+  }
+
+  .mImageContainer {
+    max-width: 100%;
+    height: 280px;
+  }
+
+  .mServicesGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .mServiceCard {
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    border-radius: 20px;
+    padding: 24px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.01);
+    box-sizing: border-box;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    cursor: pointer;
+  }
+
+  .mServiceCard:hover .mCardIconCircle,
+  .mServiceCard:active .mCardIconCircle {
+    background-color: var(--primary-green, #BEEB42);
+  }
+
+  .mCardIconCircle {
+    width: 44px;
+    height: 44px;
+    background-color: #F1F6DD;
+    color: var(--dark-green, #4C7A34);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  .mServiceCard h4 {
+    font-size: 13px;
+    font-weight: 800;
+    color: #111111;
+    margin: 0 0 6px 0;
+  }
+
+  .mServiceCard p {
+    font-size: 11px;
+    color: #666666;
+    margin: 0 0 12px 0;
+    line-height: 1.35;
+    font-weight: 500;
+  }
+
+  .mCardUnderline {
+    width: 24px;
+    height: 2px;
+    background-color: var(--dark-green, #4C7A34);
+    border-radius: 1px;
+    opacity: 0.8;
+  }
+
+  .mPanIndiaBanner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    margin: 32px 0 24px 0;
+    padding: 0 16px;
+  }
+
+  .mPanIndiaPill {
+    background-color: var(--dark-green, #4C7A34);
+    color: #ffffff;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  .mPanIndiaText {
+    font-size: 11.5px;
+    color: #666666;
+    line-height: 1.5;
+    font-weight: 500;
+    max-width: 450px;
+    margin: 0;
+  }
+
+  .mValueBannerCard {
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    border-radius: 20px;
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+    box-sizing: border-box;
+  }
+
+  .mValueItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .mValueIcon {
+    color: var(--dark-green, #4C7A34);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .mValueText {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+
+  .mValueText h4 {
+    font-size: 13px;
+    font-weight: 800;
+    color: #111111;
+    margin: 0 0 2px 0;
+  }
+
+  .mValueText p {
+    font-size: 11px;
+    color: #666666;
+    margin: 0;
+    line-height: 1.35;
+  }
+}
+
+@media (max-width: 480px) {
+  .servicesSection {
+    padding: 32px 16px 28px;
+    margin: 8px 8px;
+    border-radius: 20px;
+  }
+
+  .mMainTitle {
+    font-size: 24px;
+  }
+
+  .mImageContainer {
+    max-width: 100%;
+    height: 260px;
+  }
+
+  .mServicesGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+}
+

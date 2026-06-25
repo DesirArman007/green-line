@@ -171,7 +171,9 @@
 
 .inputWrapper textarea {
   resize: vertical;
-  min-height: 110px;
+  min-height: 70px;
+  height: 70px;
+  overflow-y: hidden;
 }
 
 .inputWrapper input:focus,
@@ -189,11 +191,13 @@
 
 .submitBtn {
   grid-column: span 2;
+  justify-self: center;
+  width: fit-content;
   background: linear-gradient(135deg, var(--dark-green, #4C7A34) 0%, #355824 100%);
   color: #ffffff;
-  padding: 16px;
+  padding: 12px 32px;
   border-radius: 12px;
-  font-size: 15px;
+  font-size: 14.5px;
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -443,6 +447,26 @@
     grid-template-columns: 1fr;
     gap: 32px;
   }
+
+  .rightColumn {
+    display: contents;
+  }
+
+  .mapCard {
+    order: 1;
+  }
+
+  .formCard {
+    order: 2;
+  }
+
+  .statsCard {
+    display: none;
+  }
+
+  .trustCard {
+    display: none;
+  }
   
   .bookingSection {
     padding: 80px 48px;
@@ -466,16 +490,64 @@
 
 @media (max-width: 580px) {
   .formFields {
-    grid-template-columns: 1fr;
-    gap: 16px;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 14px;
   }
   
   .fullWidthField {
-    grid-column: span 1;
+    grid-column: span 2;
   }
   
   .submitBtn {
-    grid-column: span 1;
+    grid-column: span 2;
+    padding: 10px 24px;
+    font-size: 13.5px;
+  }
+
+  .successMessage {
+    grid-column: span 2;
+  }
+
+  .inputWrapper input,
+  .inputWrapper select,
+  .inputWrapper textarea {
+    padding: 12px 12px 12px 42px;
+    font-size: 13px;
+  }
+
+  .mapAddressCard {
+    left: 12px;
+    right: 12px;
+    top: 12px;
+    max-width: none;
+    padding: 10px 12px;
+  }
+
+  .openMapsBtn {
+    top: auto;
+    right: auto;
+    left: 12px;
+    bottom: 12px;
+    padding: 8px 12px;
+    font-size: 11px;
+  }
+
+  .zoomControls {
+    bottom: 12px;
+    right: 12px;
+  }
+
+  .statsCard {
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px;
+  }
+
+  .statItem:not(:last-child) {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 16px;
+    width: 100%;
   }
 
   .trustCard {
@@ -497,3 +569,22 @@
     padding-bottom: 12px;
   }
 }
+
+@media (max-width: 480px) {
+  .bookingSection {
+    padding: 48px 16px;
+    margin: 8px 8px;
+    border-radius: 20px;
+  }
+  .formCard {
+    padding: 24px 18px;
+    border-radius: 20px;
+  }
+  .formTitle {
+    font-size: 24px;
+  }
+  .mapCard {
+    height: 280px;
+  }
+}
+

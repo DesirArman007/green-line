@@ -613,7 +613,8 @@ export default function ScreenCarousel({
     return () => obs.disconnect();
   }, []);
 
-  const eLaptopWidth = containerW > 0 ? Math.min(laptopWidth, containerW - 32) : laptopWidth;
+  const isMobileSize = containerW > 0 && containerW <= 768;
+  const eLaptopWidth = containerW > 0 ? Math.min(laptopWidth, isMobileSize ? containerW : containerW - 32) : laptopWidth;
 
   const rotX = useMotionValue(0);
   const rotY = useMotionValue(0);
@@ -637,7 +638,7 @@ export default function ScreenCarousel({
     >
       <div
         onMouseMove={(e) => {
-          if (!tilt || !containerRef.current) return;
+          if (!tilt || isMobileSize || !containerRef.current) return;
           const rect = containerRef.current.getBoundingClientRect();
           const dx = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
           const dy = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
@@ -676,30 +677,56 @@ export default function ScreenCarousel({
         )}
         <motion.div
           style={{
-            rotateX: tilt ? springRotX : 0,
-            rotateY: tilt ? springRotY : 0,
+            rotateX: tilt && !isMobileSize ? springRotX : 0,
+            rotateY: tilt && !isMobileSize ? springRotY : 0,
             transformStyle: 'preserve-3d',
             zIndex: 1
           }}
         >
-          <MacBookFrame
-            width={eLaptopWidth}
-            frameColor={frameColor}
-            showShadow={frameShadow}
-            glareX={glareX}
-            glareY={glareY}
-          >
-            <VideoPlayer
-              mediaItems={mediaItems}
-              autoplay={autoplay}
-              loop={loop}
-              progressBar={progressBar}
-              videoTransition={videoTransition}
-              imageDuration={imageDuration}
-              activeIndex={activeIndex}
-              onIndexChange={onIndexChange}
-            />
-          </MacBookFrame>
+          {isMobileSize ? (
+            <div
+              style={{
+                width: eLaptopWidth,
+                aspectRatio: '1.6', // 16:10 aspect ratio matching lid proportions
+                borderRadius: '16px',
+                overflow: 'hidden',
+                boxShadow: '0 12px 36px rgba(0, 0, 0, 0.25)',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                background: '#000',
+                position: 'relative'
+              }}
+            >
+              <VideoPlayer
+                mediaItems={mediaItems}
+                autoplay={autoplay}
+                loop={loop}
+                progressBar={progressBar}
+                videoTransition={videoTransition}
+                imageDuration={imageDuration}
+                activeIndex={activeIndex}
+                onIndexChange={onIndexChange}
+              />
+            </div>
+          ) : (
+            <MacBookFrame
+              width={eLaptopWidth}
+              frameColor={frameColor}
+              showShadow={frameShadow}
+              glareX={glareX}
+              glareY={glareY}
+            >
+              <VideoPlayer
+                mediaItems={mediaItems}
+                autoplay={autoplay}
+                loop={loop}
+                progressBar={progressBar}
+                videoTransition={videoTransition}
+                imageDuration={imageDuration}
+                activeIndex={activeIndex}
+                onIndexChange={onIndexChange}
+              />
+            </MacBookFrame>
+          )}
         </motion.div>
       </div>
     </div>

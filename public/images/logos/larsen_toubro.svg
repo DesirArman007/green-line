@@ -28,7 +28,7 @@
   <defs id="defs1343"/>
   <sodipodi:namedview inkscape:window-height="708" inkscape:window-width="1024" inkscape:pageshadow="2" inkscape:pageopacity="0.0" borderopacity="1.0" bordercolor="#666666" pagecolor="#ffffff" id="base" showgrid="true" inkscape:zoom="0.062656858" inkscape:cx="267.30192" inkscape:cy="3180.9681" inkscape:window-x="-4" inkscape:window-y="-4" inkscape:current-layer="layer2"/>
   <g inkscape:groupmode="layer" id="layer2" inkscape:label="Yellow" style="display: inline;">
-    <rect style="opacity: 1; fill: rgb(255, 255, 0); fill-opacity: 1; stroke: none; stroke-width: 4; stroke-miterlimit: 4; stroke-dasharray: none; stroke-dashoffset: 0pt; stroke-opacity: 1;" id="rect1352" width="3047.054" height="3024.4832" x="0" y="-1.9124948"/>
+    <circle cx="1500" cy="1500" r="1360" style="opacity: 1; fill: #FBCD13; stroke: none;" id="rect1352" />
   </g>
   <g inkscape:groupmode="layer" id="layer3" inkscape:label="Logo" style="display: inline;">
     <path sodipodi:type="arc" style="opacity: 1; fill: none; fill-opacity: 1; stroke: rgb(0, 0, 0); stroke-width: 235.61; stroke-miterlimit: 4; stroke-dasharray: none; stroke-dashoffset: 0pt; stroke-opacity: 1;" id="path2228" sodipodi:cx="1658.9517" sodipodi:cy="1499.0437" sodipodi:rx="1230.1071" sodipodi:ry="1320.3901" d="M 2889.0587 1499.0437 A 1230.1071 1320.3901 0 1 1  428.8446,1499.0437 A 1230.1071 1320.3901 0 1 1  2889.0587 1499.0437 z" transform="matrix(1.11623, 0, 0, 1.0399, -351.766, -58.8619)"/>
