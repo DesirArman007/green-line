@@ -94,7 +94,7 @@ const statsList = [
 
 export default function About() {
   return (
-    <section className={styles.aboutSection}>
+    <section className={styles.aboutSection} id="about">
       <div className={styles.container}>
         
         {/* Left Column - Content */}

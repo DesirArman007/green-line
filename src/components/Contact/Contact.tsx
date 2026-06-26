@@ -6,7 +6,7 @@ import styles from './Contact.module.css';
 
 export default function Contact() {
   return (
-    <section className={styles.contactSection}>
+    <section className={styles.contactSection} id="contact">
       <div className={styles.container}>
         
         {/* Header */}
@@ -48,7 +48,7 @@ export default function Contact() {
           
           {/* Card 1: Our Location */}
           <motion.a 
-            href="https://maps.app.goo.gl/nsXXjwKXTdx1Hbq57" 
+            href="https://www.google.com/maps/search/?api=1&query=23-28-1A,+Mutyalampadu,+SN+Puram,+Vijayawada+-+520011" 
             target="_blank" 
             rel="noopener noreferrer" 
             className={styles.contactCard}
@@ -67,7 +67,7 @@ export default function Contact() {
               <div className={styles.cardInfo}>
                 <span className={styles.cardLabel}>OUR LOCATION</span>
                 <h4 className={styles.cardTitleText}>Greenline Car Travels</h4>
-                <p className={styles.cardDesc}>Shamshabad, Hyderabad – 501218 India</p>
+                <p className={styles.cardDesc}>#23-28-1A, Mutyalampadu, SN Puram, Vijayawada - 520011</p>
               </div>
             </div>
             <div className={styles.cardRight}>

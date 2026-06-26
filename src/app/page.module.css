@@ -35,19 +35,23 @@
   pointer-events: none;
 }
 
-.heroSection > *:not(.videoBg) {
+.heroSection > *:not(.videoBg):not(nav) {
   position: relative;
   z-index: 2;
 }
 
 .bottomSection {
-  margin-top: auto;
-  padding: 0 48px 80px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0 48px 40px;
   max-width: 100%;
   width: 100%;
   margin-left: auto;
   margin-right: auto;
   box-sizing: border-box;
+  z-index: 10;
 }
 
 /* Responsive */
@@ -58,7 +62,7 @@
     min-height: 100dvh;
   }
   .bottomSection {
-    padding: 0 32px 60px;
+    padding: 0 32px 30px;
   }
 }
 

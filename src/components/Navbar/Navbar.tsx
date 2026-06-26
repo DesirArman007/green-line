@@ -1,13 +1,49 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrollState, setScrollState] = useState<'top' | 'visible' | 'hidden'>('top');
+  const pathname = usePathname();
+  const lastScrollY = useRef(0);
+
+  const isActive = (path: string) => pathname === path;
+
+  useEffect(() => {
+    const threshold = 100; // px past which the navbar becomes sticky
+
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+
+      if (currentY <= threshold) {
+        setScrollState('top');
+      } else if (currentY < lastScrollY.current) {
+        // Scrolling UP → show
+        setScrollState('visible');
+      } else {
+        // Scrolling DOWN → hide
+        setScrollState('hidden');
+      }
+
+      lastScrollY.current = currentY;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navClasses = [
+    styles.navbar,
+    scrollState !== 'top' ? styles.navbarScrolled : '',
+    scrollState === 'hidden' ? styles.navbarHidden : '',
+  ].filter(Boolean).join(' ');
 
   return (
-    <nav className={styles.navbar}>
+    <nav className={navClasses}>
       <div className={styles.logo}>
         <img src="/images/logo.png" alt="GreenLine" className={styles.logoImage} />
         <div className={styles.logoText}>
@@ -20,17 +56,11 @@ export default function Navbar() {
 
       {/* Desktop Nav Links */}
       <ul className={styles.navLinks}>
-        <li className={styles.active}><a href="#">Home</a></li>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Services</a></li>
-        <li>
-          <a href="#">
-            Cars 
-            <svg className={styles.chevronIcon} width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M1 1l4 4 4-4" />
-            </svg>
-          </a>
-        </li>
+        <li className={isActive('/') ? styles.active : ''}><Link href="/">Home</Link></li>
+        <li><Link href="/#about">About Us</Link></li>
+        <li><Link href="/#services">Services</Link></li>
+        <li className={isActive('/packages') ? styles.active : ''}><Link href="/packages">Packages</Link></li>
+        <li className={isActive('/tariff') ? styles.active : ''}><Link href="/tariff">Tariff</Link></li>
         <li>
           <a href="#">
             Pages 
@@ -39,7 +69,7 @@ export default function Navbar() {
             </svg>
           </a>
         </li>
-        <li><a href="#">Contact Us</a></li>
+        <li><Link href="/#contact">Contact Us</Link></li>
       </ul>
 
       {/* Desktop CTA */}
@@ -66,12 +96,13 @@ export default function Navbar() {
       {/* Mobile Menu Overlay */}
       <div className={`${styles.mobileMenu} ${menuOpen ? styles.mobileMenuOpen : ''}`}>
         <ul className={styles.mobileNavLinks}>
-          <li><a href="#" onClick={() => setMenuOpen(false)}>Home</a></li>
-          <li><a href="#about" onClick={() => setMenuOpen(false)}>About Us</a></li>
-          <li><a href="#" onClick={() => setMenuOpen(false)}>Services</a></li>
-          <li><a href="#" onClick={() => setMenuOpen(false)}>Cars</a></li>
+          <li><Link href="/" onClick={() => setMenuOpen(false)}>Home</Link></li>
+          <li><Link href="/#about" onClick={() => setMenuOpen(false)}>About Us</Link></li>
+          <li><Link href="/#services" onClick={() => setMenuOpen(false)}>Services</Link></li>
+          <li><Link href="/packages" onClick={() => setMenuOpen(false)}>Packages</Link></li>
+          <li><Link href="/tariff" onClick={() => setMenuOpen(false)}>Tariff</Link></li>
           <li><a href="#" onClick={() => setMenuOpen(false)}>Pages</a></li>
-          <li><a href="#" onClick={() => setMenuOpen(false)}>Contact Us</a></li>
+          <li><Link href="/#contact" onClick={() => setMenuOpen(false)}>Contact Us</Link></li>
         </ul>
         <button className={styles.mobileCtaBtn} onClick={() => setMenuOpen(false)}>
           Get Started

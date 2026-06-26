@@ -1,0 +1,143 @@
+.container {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.button {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  text-decoration: none;
+  pointer-events: auto;
+}
+
+.button:hover {
+  transform: scale(1.1) translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+.whatsapp {
+  background-color: #25d366;
+}
+
+.whatsapp::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  border: 2px solid #25d366;
+  opacity: 0;
+  animation: pulse 2s infinite;
+}
+
+.call {
+  background-color: #4C7A34;
+}
+
+.call::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  border: 2px solid #4C7A34;
+  opacity: 0;
+  animation: pulse 2s infinite;
+  animation-delay: 0.5s;
+}
+
+.icon {
+  width: 26px;
+  height: 26px;
+  fill: currentColor;
+}
+
+.tooltip {
+  position: absolute;
+  right: 70px;
+  background-color: #1a2315;
+  color: #ffffff;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(10px);
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.tooltip::after {
+  content: "";
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  width: 8px;
+  height: 8px;
+  background-color: #1a2315;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.button:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  .container {
+    bottom: 20px;
+    right: 20px;
+    gap: 12px;
+  }
+  
+  .button {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .icon {
+    width: 22px;
+    height: 22px;
+  }
+  
+  .tooltip {
+    display: none; /* Hide tooltips on touch devices */
+  }
+}

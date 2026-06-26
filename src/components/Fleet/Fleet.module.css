@@ -162,6 +162,7 @@
 
 .badgeRow {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 12px;
 }
@@ -278,6 +279,22 @@
   .title {
     font-size: 32px;
   }
+  .cardContent {
+    padding: 24px 20px;
+  }
+  .cardTitle {
+    font-size: 20px;
+  }
+  .cardModels {
+    font-size: 12px;
+  }
+  .featuresList li {
+    font-size: 12.5px;
+  }
+  .bookBtn {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
 }
 
 @media (max-width: 680px) {
@@ -297,16 +314,41 @@
     border-radius: 20px;
   }
   .title {
-    font-size: 28px;
+    font-size: 26px;
   }
   .cardContainer {
-    height: 400px;
+    height: 380px;
   }
   .cardContent {
-    padding: 24px 20px;
+    padding: 20px 16px;
+  }
+  .cardTitle {
+    font-size: 18px;
+  }
+  .cardModels {
+    font-size: 12px;
+  }
+  .featuresList {
+    gap: 6px;
+  }
+  .featuresList li {
+    font-size: 12px;
   }
   .subtitle {
     font-size: 11px;
     letter-spacing: 2px;
+  }
+  .badgeRow {
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+  .seatsBadge,
+  .priceBadge {
+    padding: 3px 10px;
+    font-size: 10.5px;
+  }
+  .bookBtn {
+    padding: 9px 18px;
+    font-size: 12.5px;
   }
 }

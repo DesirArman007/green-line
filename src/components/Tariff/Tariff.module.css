@@ -1,0 +1,586 @@
+.tariffSection {
+  background-color: #F6FBF4;
+  padding: 100px 64px;
+  color: #2D3728;
+  font-family: var(--font-inter), sans-serif;
+  position: relative;
+  z-index: 1;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Banner Header Area */
+.headerBanner {
+  background-image: url("/images/tariff_header_bg.png");
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: cover;
+  border-radius: 24px;
+  padding: 48px 64px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 48px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  border: 1px solid #ebf2e7;
+  position: relative;
+  overflow: hidden;
+}
+
+.headerContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+}
+
+.subtitleWrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.greenLine {
+  width: 24px;
+  height: 2px;
+  background-color: #4C7A34;
+}
+
+.subtitle {
+  font-size: 13px;
+  font-weight: 700;
+  color: #4C7A34;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.title {
+  font-size: 56px;
+  font-weight: 800;
+  color: #1A2315;
+  margin: 0;
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+.highlight {
+  color: #4C7A34;
+}
+
+.tagline {
+  font-size: 16px;
+  color: #666666;
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+/* Quick Call Card */
+.quickCallCard {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background-color: #ffffff;
+  border: 1px solid #e1eedb;
+  border-radius: 20px;
+  padding: 16px 28px;
+  box-shadow: 0 10px 30px rgba(76, 122, 52, 0.08);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s ease;
+  cursor: pointer;
+  text-decoration: none;
+  min-width: 260px;
+}
+
+.quickCallCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(76, 122, 52, 0.12);
+}
+
+.phoneIconWrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #F1F6DD;
+  color: #4C7A34;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.quickCallCard:hover .phoneIconWrapper {
+  background-color: #4C7A34;
+  color: #ffffff;
+}
+
+.quickCallText {
+  display: flex;
+  flex-direction: column;
+}
+
+.quickCallLabel {
+  font-size: 12px;
+  color: #777777;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.quickCallPhone {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a2315;
+  margin-top: 2px;
+}
+
+/* Main Grid Layout */
+.mainGrid {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr;
+  gap: 32px;
+  margin-bottom: 48px;
+}
+
+.tablesContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.tableBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.tableHeaderSection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tableHeaderTitle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tableHeaderTitle h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a2315;
+  margin: 0;
+}
+
+.tableHeaderIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background-color: #E2ECD8;
+  color: #4C7A34;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Left Table Column */
+.tableWrapper {
+  background-color: #ffffff;
+  border-radius: 20px;
+  border: 1px solid #ebf2e7;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.02);
+  overflow: hidden;
+}
+
+.responsiveTable {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.pricingTable {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.pricingTable th {
+  background-color: #4C7A34;
+  color: #ffffff;
+  padding: 18px 20px;
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pricingTable th:last-child {
+  border-right: none;
+}
+
+.thContent {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.headerIcon {
+  color: rgba(255, 255, 255, 0.9);
+  flex-shrink: 0;
+}
+
+.pricingTable td {
+  padding: 16px 20px;
+  border-bottom: 1px solid #edf4eb;
+  border-right: 1px solid #edf4eb;
+  color: #333333;
+  font-weight: 500;
+}
+
+.pricingTable td:last-child {
+  border-right: none;
+}
+
+.pricingTable tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.pricingTable tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.pricingTable tbody tr:hover {
+  background-color: #f7fbf5;
+}
+
+.altRow {
+  background-color: #fbfdfa;
+}
+
+.carNameCell {
+  width: 32%;
+}
+
+.carCellContent {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.carIconBadge {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #E2ECD8;
+  color: #4C7A34;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.carName {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1A2315;
+}
+
+.priceCell {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333333;
+  text-align: center;
+}
+
+.battaCell {
+  font-size: 13px;
+  font-weight: 600;
+  color: #555555;
+  text-align: center;
+}
+
+/* Right Column: Quick Call + Types of Car Rentals */
+.typesWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.typesCard {
+  background-color: #ffffff;
+  border-radius: 20px;
+  border: 1px solid #ebf2e7;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.02);
+  padding: 32px 28px;
+  height: 100%;
+}
+
+.typesHeader {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #edf4eb;
+  padding-bottom: 18px;
+}
+
+.typesIconBadge {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #F1F6DD;
+  color: #4C7A34;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.typesHeader h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a2315;
+  margin: 0;
+}
+
+.typesListGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.typesList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.typesList li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.chevron {
+  color: #4C7A34;
+  font-weight: 700;
+  font-size: 11px;
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+.typeLink {
+  color: #1a73e8;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  line-height: 1.4;
+  transition: color 0.15s ease, transform 0.15s ease;
+  display: inline-block;
+}
+
+.typeLink:hover {
+  color: #0d47a1;
+  transform: translateX(2px);
+}
+
+/* Bottom Details Row */
+.bottomRow {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Left Bottom: Quick Badges */
+.badgesCol {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.badgeItem {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 24px;
+  border-radius: 16px;
+  border: 1px solid #f0f7ed;
+  background-color: #fbfdfa;
+}
+
+.badgeIconBg {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #E2ECD8;
+  color: #4C7A34;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.badgeText {
+  display: flex;
+  flex-direction: column;
+}
+
+.badgeTitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1A2315;
+}
+
+.badgeDesc {
+  font-size: 13px;
+  color: #666666;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+/* Right Bottom: Detailed Terms Box */
+.termsBox {
+  background-color: #F6FBF4;
+  border-radius: 20px;
+  border: 1px solid #e1eedb;
+  padding: 32px;
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  height: 100%;
+}
+
+.termsIconBg {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #4C7A34;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.termsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+.termsList li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.checkIcon {
+  color: #4C7A34;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.termsList li span {
+  font-size: 13px;
+  color: #44503C;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1200px) {
+  .tariffSection {
+    padding: 80px 32px;
+  }
+  
+  .title {
+    font-size: 46px;
+  }
+
+  .headerBanner {
+    padding: 40px 48px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .mainGrid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .headerBanner {
+    flex-direction: column;
+    text-align: center;
+    gap: 32px;
+    padding: 40px 32px;
+  }
+
+  .quickCallCard {
+    width: 100%;
+    max-width: 320px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .tariffSection {
+    padding: 60px 20px;
+  }
+
+  .headerBanner {
+    background-image: none;
+    background-color: #f7faf5;
+    padding: 32px 20px;
+  }
+
+  .title {
+    font-size: 36px;
+  }
+
+  .typesListGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .termsBox {
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 28px;
+  }
+
+  .tagline {
+    font-size: 14px;
+  }
+
+  .quickCallCard {
+    padding: 12px 20px;
+    min-width: unset;
+  }
+
+  .quickCallPhone {
+    font-size: 16px;
+  }
+  
+  .badgeItem {
+    padding: 12px 16px;
+    gap: 12px;
+  }
+}

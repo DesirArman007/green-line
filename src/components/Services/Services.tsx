@@ -60,7 +60,7 @@ export default function Services() {
   ];
 
   return (
-    <section className={styles.servicesSection}>
+    <section className={styles.servicesSection} id="services">
       {/* Desktop Layout (visible on screens > 768px) */}
       <div className={`${styles.container} ${styles.desktopView}`}>
         {/* Header */}

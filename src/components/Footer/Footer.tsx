@@ -142,14 +142,14 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="https://maps.app.goo.gl/nsXXjwKXTdx1Hbq57" target="_blank" rel="noopener noreferrer" className={styles.contactItem}>
+                <a href="https://www.google.com/maps/search/?api=1&query=23-28-1A,+Mutyalampadu,+SN+Puram,+Vijayawada+-+520011" target="_blank" rel="noopener noreferrer" className={styles.contactItem}>
                   <span className={styles.contactIcon}>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                       <circle cx="12" cy="10" r="3" />
                     </svg>
                   </span>
-                  <span>Shamshabad, Hyderabad 501218</span>
+                  <span>#23-28-1A, Mutyalampadu, SN Puram, Vijayawada - 520011</span>
                 </a>
               </li>
             </ul>

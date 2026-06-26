@@ -4,6 +4,7 @@ import SearchBar from '@/components/SearchBar/SearchBar';
 import ClientsMarquee from '@/components/ClientsMarquee/ClientsMarquee';
 import About from '@/components/About/About';
 import Services from '@/components/Services/Services';
+import PackagesPreview from '@/components/PackagesPreview/PackagesPreview';
 import Fleet from '@/components/Fleet/Fleet';
 import Testimonials from '@/components/Testimonials/Testimonials';
 import VideoTestimonials from '@/components/VideoTestimonials/VideoTestimonials';
@@ -28,6 +29,7 @@ export default function Home() {
       <ClientsMarquee />
       <About />
       <Services />
+      <PackagesPreview />
       <Fleet />
       <Testimonials />
       <VideoTestimonials />

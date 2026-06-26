@@ -214,7 +214,7 @@ export default function Booking() {
             {/* Map Card */}
             <div className={styles.mapCard}>
               <iframe 
-                src="https://maps.google.com/maps?q=17.256832,78.450276&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                src="https://maps.google.com/maps?q=23-28-1A,+Mutyalampadu,+SN+Puram,+Vijayawada+-+520011&t=&z=15&ie=UTF8&iwloc=&output=embed" 
                 className={styles.mapIframe}
                 allowFullScreen={true}
                 loading="lazy"
@@ -230,13 +230,13 @@ export default function Booking() {
                 </span>
                 <div className={styles.mapAddressInfo}>
                   <h4>Greenline Travels</h4>
-                  <p>Shamshabad, Hyderabad 501218</p>
+                  <p>#23-28-1A, Mutyalampadu, SN Puram, Vijayawada - 520011</p>
                 </div>
               </div>
 
               {/* Open Maps Button Overlay */}
               <a 
-                href="https://maps.app.goo.gl/nsXXjwKXTdx1Hbq57"
+                href="https://www.google.com/maps/search/?api=1&query=23-28-1A,+Mutyalampadu,+SN+Puram,+Vijayawada+-+520011"
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className={styles.openMapsBtn}

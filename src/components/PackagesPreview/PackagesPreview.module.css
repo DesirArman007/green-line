@@ -1,0 +1,463 @@
+/* ===================================
+   PackagesPreview — Home Page Section
+   Dark theme, consistent with Fleet section
+   =================================== */
+
+.section {
+  background-color: #0D140F;
+  padding: 80px 64px;
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  border-radius: 40px;
+  margin: 24px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* Ambient glow */
+.section::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(190, 235, 66, 0.06) 0%, transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* ---- Header ---- */
+.header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.subtitleWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.line {
+  height: 1px;
+  width: 40px;
+  background: linear-gradient(to right, transparent, rgba(190, 235, 66, 0.5), transparent);
+}
+
+.subtitle {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--primary-green);
+  text-transform: uppercase;
+}
+
+.title {
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -1.5px;
+  color: #ffffff;
+  margin-top: 8px;
+}
+
+.highlight {
+  color: var(--primary-green);
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+}
+
+.highlight::after {
+  content: '';
+  position: absolute;
+  bottom: 6px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background-color: rgba(190, 235, 66, 0.15);
+  z-index: -1;
+  border-radius: 2px;
+}
+
+.headerDesc {
+  font-size: 15.5px;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.7;
+  max-width: 620px;
+  margin: 16px auto 0;
+}
+
+/* ---- Cards Grid ---- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+/* ---- Card ---- */
+.card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(190, 235, 66, 0.3);
+  box-shadow:
+    0 20px 48px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(190, 235, 66, 0.08);
+}
+
+/* ---- Image ---- */
+.imageWrapper {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.card:hover .cardImage {
+  transform: scale(1.08);
+}
+
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 40%,
+    rgba(13, 20, 15, 0.9) 100%
+  );
+  z-index: 1;
+}
+
+.durationBadge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.3px;
+}
+
+.categoryBadge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--primary-green);
+  color: #0d140f;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+/* ---- Card Content ---- */
+.cardContent {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 16px;
+}
+
+.cardTop {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.locationRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.destination {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.3px;
+}
+
+.cardTitle {
+  font-size: 20px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.3px;
+  margin: 0;
+  line-height: 1.3;
+}
+
+/* ---- Highlights ---- */
+.highlights {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.highlights li {
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.45;
+  font-weight: 500;
+}
+
+.highlightDot {
+  width: 5px;
+  height: 5px;
+  background-color: var(--primary-green);
+  border-radius: 50%;
+  display: inline-block;
+  margin-top: 6px;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px var(--primary-green);
+}
+
+/* ---- Card Footer ---- */
+.cardFooter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  gap: 12px;
+}
+
+.priceBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.priceLabel {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.price {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--primary-green);
+  letter-spacing: -0.5px;
+}
+
+.vehicleBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 20px;
+}
+
+/* ---- CTA ---- */
+.ctaWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 48px;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 14px 32px;
+  border-radius: 40px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  text-decoration: none;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.ctaButton:hover {
+  background: var(--primary-green);
+  color: #0d140f;
+  border-color: var(--primary-green);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(190, 235, 66, 0.25);
+}
+
+.ctaArrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.ctaButton:hover .ctaArrow {
+  background: rgba(13, 20, 15, 0.2);
+  transform: translateX(3px);
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 60px 24px;
+    margin: 12px 12px;
+    border-radius: 24px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .headerDesc {
+    font-size: 14px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .cardContent {
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .cardTitle {
+    font-size: 18px;
+  }
+
+  .highlights {
+    gap: 6px;
+  }
+
+  .highlights li {
+    font-size: 12px;
+  }
+
+  .cardFooter {
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 12px;
+  }
+
+  .priceBlock {
+    flex: 0 0 auto;
+  }
+
+  .vehicleBadge {
+    flex: 0 0 auto;
+    font-size: 10px;
+    padding: 5px 8px;
+  }
+}
+
+@media (max-width: 580px) {
+  .section {
+    padding: 48px 16px;
+    margin: 8px 8px;
+    border-radius: 20px;
+  }
+
+  .title {
+    font-size: 26px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+  }
+
+  .imageWrapper {
+    height: 180px;
+  }
+
+  .cardContent {
+    padding: 16px;
+  }
+
+  .subtitle {
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+
+  .ctaButton {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 24px;
+    font-size: 14px;
+  }
+}

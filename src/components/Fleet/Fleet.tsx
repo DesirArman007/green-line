@@ -120,7 +120,7 @@ function ParallaxCard({ title, models, seats, price, features, bgImage }: Parall
 
 export default function Fleet() {
   return (
-    <section className={styles.fleetSection}>
+    <section className={styles.fleetSection} id="fleet">
       <div className={styles.container}>
 
         {/* Header */}
