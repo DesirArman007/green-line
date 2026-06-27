@@ -1,0 +1,578 @@
+/* ===================================
+   RoutePricing — Upgraded Mockup Design
+   Dark forest green & neon lime-green theme
+   =================================== */
+
+.section {
+  background-color: transparent;
+  padding: 40px 0;
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  box-sizing: border-box;
+}
+
+.section * {
+  box-sizing: border-box;
+}
+
+/* Ambient glow */
+.section::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 650px;
+  height: 650px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(190, 235, 66, 0.05) 0%, transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  padding: 0 24px;
+}
+
+/* ---- Upgraded Header Banner Card ---- */
+.routeHeaderCard {
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 30px 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.routeHeaderCard::before {
+  content: '';
+  position: absolute;
+  top: -8%;
+  left: -8%;
+  right: -8%;
+  bottom: -8%;
+  background: url('/images/fleet_header_bg.png') center/cover no-repeat;
+  z-index: 0;
+}
+
+.routeMapIcon {
+  display: flex;
+  align-items: center;
+  opacity: 0.8;
+}
+
+.headerTexts {
+  text-align: center;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.routeTitle {
+  font-size: 38px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #ffffff;
+  margin: 0 0 6px;
+  line-height: 1.1;
+}
+
+.swapArrow {
+  color: var(--primary-green, #BEEB42);
+  font-size: 38px;
+  margin: 0 8px;
+}
+
+.subtitle {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.greenText {
+  color: var(--primary-green, #BEEB42);
+}
+
+.headerCarIllustration {
+  display: flex;
+  align-items: center;
+  opacity: 0.7;
+}
+
+/* ---- Layout Grid ---- */
+.layoutGrid {
+  display: grid;
+  grid-template-columns: 260px 420px 1fr;
+  gap: 30px;
+  align-items: stretch;
+}
+
+/* ---- Column 1: Tabs List with car image & chevrons ---- */
+.tabsCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebarTitle {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--primary-green, #BEEB42);
+  text-transform: uppercase;
+  margin-top: 4px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.sidebarTitle::before {
+  display: none;
+}
+
+.sidebarTitle::after {
+  content: '';
+  height: 2px;
+  width: 48px;
+  background: var(--primary-green, #BEEB42);
+  opacity: 0.8;
+}
+
+.tabsListCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100%;
+}
+
+.tabBtn {
+  background: rgba(13, 20, 15, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 15px;
+  font-weight: 700;
+  padding: 16px 20px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.tabBtnLeft {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.tabThumbWrapper {
+  width: 64px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tabThumb {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.tabName {
+  transition: color 0.2s ease;
+}
+
+.chevronIcon {
+  color: rgba(255, 255, 255, 0.25);
+  transition: all 0.25s ease;
+}
+
+.tabBtn:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: #ffffff;
+  border-color: rgba(190, 235, 66, 0.2);
+}
+
+.tabBtn:hover .chevronIcon {
+  color: rgba(255, 255, 255, 0.5);
+  transform: translateX(2px);
+}
+
+.activeTab {
+  background: linear-gradient(90deg, #A8E02D 0%, #C3F052 100%) !important;
+  color: #0d140f !important;
+  border-color: #BEEB42 !important;
+  box-shadow:
+    0 10px 30px rgba(190, 235, 66, 0.25),
+    0 0 0 1px rgba(190, 235, 66, 0.3) !important;
+}
+
+.activeTab .chevronIcon {
+  color: #0d140f;
+}
+
+.activeTab .tabThumb {
+  mix-blend-mode: multiply;
+}
+
+.activeTab .tabName {
+  font-weight: 900;
+}
+
+/* ---- Column 2: Digital Poster ---- */
+.posterCol {
+  display: flex;
+}
+
+.posterCard {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow:
+    0 24px 50px rgba(0, 0, 0, 0.45),
+    0 0 40px rgba(190, 235, 66, 0.04);
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  background: linear-gradient(180deg, #070b08 0%, #0d140f 50%, #070b08 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.posterCard:hover {
+  transform: scale(1.02);
+}
+
+.flatPosterImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---- Column 3: Premium pricing card ---- */
+.pricingCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.pricingDetailsCard {
+  background: rgba(13, 20, 15, 0.8);
+  border: 1px solid rgba(190, 235, 66, 0.15);
+  border-radius: 28px;
+  padding: 32px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.pricingBlock {
+  display: flex;
+  flex-direction: column;
+}
+
+.blockHeaderRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.blockHeaderRow::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(190, 235, 66, 0.2);
+}
+
+.circularIconCircle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(190, 235, 66, 0.08);
+  border: 1px solid rgba(190, 235, 66, 0.2);
+  color: var(--primary-green, #BEEB42);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.blockTitle {
+  font-size: 15px;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+.pricingTable {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.priceRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rowLabelGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+}
+
+.rowIcon {
+  color: var(--primary-green, #BEEB42);
+  opacity: 0.8;
+  flex-shrink: 0;
+}
+
+.dots {
+  flex: 1;
+  border-bottom: 1px dotted rgba(190, 235, 66, 0.15);
+  margin: 0 14px;
+  height: 12px;
+}
+
+.value {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--primary-green, #BEEB42);
+  letter-spacing: 0.3px;
+}
+
+.pillContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(190, 235, 66, 0.05);
+  border: 1px solid rgba(190, 235, 66, 0.15);
+  color: var(--primary-green, #BEEB42);
+  border-radius: 30px;
+  padding: 8px 20px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-top: 20px;
+}
+
+.pillIcon {
+  color: var(--primary-green, #BEEB42);
+  flex-shrink: 0;
+}
+
+.cardDivider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.06), transparent);
+  margin: 24px 0;
+}
+
+/* Bottom Row Value Badges */
+.featuresRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 24px;
+  margin-top: 24px;
+}
+
+.featureItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.featureItem:last-child {
+  border-right: none;
+}
+
+.featureIconCircle {
+  color: var(--primary-green, #BEEB42);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.featureItem:hover .featureIconCircle {
+  transform: translateY(-2px);
+  color: #ffffff;
+}
+
+.featureLabels {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.featTitle {
+  font-size: 9.5px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.5px;
+}
+
+.featSub {
+  font-size: 8px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1250px) {
+  .layoutGrid {
+    grid-template-columns: 240px 1fr;
+    gap: 24px;
+  }
+
+  .posterCol {
+    display: none;
+    /* Hide poster card on medium screens to keep it clean */
+  }
+}
+
+@media (max-width: 950px) {
+  .routeHeaderCard {
+    padding: 16px 24px;
+  }
+
+  .routeTitle {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 900px) {
+  .layoutGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    width: 100%;
+  }.tabsCol {
+    margin-bottom: 0;
+  }
+
+  .tabsListCard {
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 24px;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .sidebarTitle {
+    flex-direction: row;
+  }
+
+  .sidebarTitle::before {
+    display: block;
+    content: '';
+    height: 1px;
+    width: 32px;
+    background: var(--primary-green, #BEEB42);
+    opacity: 0.8;
+  }
+
+  .sidebarTitle::after {
+    height: 1px;
+    width: 32px;
+  }
+
+  .tabBtn {
+    width: 100%;
+    padding: 16px 20px;
+    font-size: 15px;
+  }
+
+  .chevronIcon {
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 40px 0;
+  }
+
+  .routeHeaderCard {
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+  }
+
+  .routeMapIcon,
+  .headerCarIllustration {
+    display: none;
+    /* Hide illustrative SVGs on mobile headers */
+  }
+
+  .routeTitle {
+    font-size: 24px;
+  }
+
+  .pricingDetailsCard {
+    padding: 24px;
+  }
+
+  .trustBadgeItem {
+    padding: 16px 12px;
+  }
+}
+
+@media (max-width: 580px) {
+  .routeTitle {
+    font-size: 20px;
+  }
+
+  .subtitle {
+    font-size: 9.5px;
+    letter-spacing: 1px;
+    line-height: 1.4;
+  }
+
+  .pricingDetailsCard {
+    padding: 20px;
+  }
+
+  .rowLabelGroup {
+    font-size: 13px;
+  }
+
+  .value {
+    font-size: 14.5px;
+  }
+}

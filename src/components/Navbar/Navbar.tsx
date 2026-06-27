@@ -44,7 +44,7 @@ export default function Navbar() {
 
   return (
     <nav className={navClasses}>
-      <div className={styles.logo}>
+      <Link href="/" className={styles.logo}>
         <img src="/images/logo.png" alt="GreenLine" className={styles.logoImage} />
         <div className={styles.logoText}>
           <span className={styles.logoTitle}>
@@ -52,7 +52,7 @@ export default function Navbar() {
           </span>
           <span className={styles.logoSubtitle}>Drive Your Journey</span>
         </div>
-      </div>
+      </Link>
 
       {/* Desktop Nav Links */}
       <ul className={styles.navLinks}>
@@ -61,14 +61,8 @@ export default function Navbar() {
         <li><Link href="/#services">Services</Link></li>
         <li className={isActive('/packages') ? styles.active : ''}><Link href="/packages">Packages</Link></li>
         <li className={isActive('/tariff') ? styles.active : ''}><Link href="/tariff">Tariff</Link></li>
-        <li>
-          <a href="#">
-            Pages 
-            <svg className={styles.chevronIcon} width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M1 1l4 4 4-4" />
-            </svg>
-          </a>
-        </li>
+        <li className={isActive('/blog') ? styles.active : ''}><Link href="/blog">Blog</Link></li>
+        <li className={isActive('/fleet') ? styles.active : ''}><Link href="/fleet">Fleet</Link></li>
         <li><Link href="/#contact">Contact Us</Link></li>
       </ul>
 
@@ -101,12 +95,10 @@ export default function Navbar() {
           <li><Link href="/#services" onClick={() => setMenuOpen(false)}>Services</Link></li>
           <li><Link href="/packages" onClick={() => setMenuOpen(false)}>Packages</Link></li>
           <li><Link href="/tariff" onClick={() => setMenuOpen(false)}>Tariff</Link></li>
-          <li><a href="#" onClick={() => setMenuOpen(false)}>Pages</a></li>
+          <li><Link href="/blog" onClick={() => setMenuOpen(false)}>Blog</Link></li>
+          <li><Link href="/fleet" onClick={() => setMenuOpen(false)}>Fleet</Link></li>
           <li><Link href="/#contact" onClick={() => setMenuOpen(false)}>Contact Us</Link></li>
         </ul>
-        <button className={styles.mobileCtaBtn} onClick={() => setMenuOpen(false)}>
-          Get Started
-        </button>
       </div>
     </nav>
   );

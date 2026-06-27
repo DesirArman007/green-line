@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import styles from './Footer.module.css';
 
 export default function Footer() {
@@ -11,7 +12,7 @@ export default function Footer() {
           
           {/* Column 1: Brand & Logo */}
           <div className={styles.brandColumn}>
-            <div className={styles.logoWrapper}>
+            <Link href="/" className={styles.logoWrapper}>
               <div className={styles.logoIconCircle}>
                 {/* Custom circular car/path icon */}
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -25,7 +26,7 @@ export default function Footer() {
                 <h3>GREENLINE</h3>
                 <span>CAR TRAVELS</span>
               </div>
-            </div>
+            </Link>
             
             <p className={styles.brandDesc}>
               Experience the pinnacle of comfort and luxury with our premium fleet. 
@@ -75,11 +76,11 @@ export default function Footer() {
             <div className={styles.headerLine}></div>
             
             <ul className={styles.linkList}>
-              <li><a href="#" className={styles.linkItem}><span className={styles.linkArrow}>&gt;</span> Home</a></li>
-              <li><a href="#about" className={styles.linkItem}><span className={styles.linkArrow}>&gt;</span> About Us</a></li>
-              <li><a href="#fleet" className={styles.linkItem}><span className={styles.linkArrow}>&gt;</span> Our Fleet</a></li>
-              <li><a href="#testimonials" className={styles.linkItem}><span className={styles.linkArrow}>&gt;</span> Testimonials</a></li>
-              <li><a href="#booking" className={styles.linkItem}><span className={styles.linkArrow}>&gt;</span> Book Now</a></li>
+              <li><Link href="/" className={styles.linkItem}><span className={styles.linkArrow}>&gt;</span> Home</Link></li>
+              <li><Link href="/#about" className={styles.linkItem}><span className={styles.linkArrow}>&gt;</span> About Us</Link></li>
+              <li><Link href="/fleet" className={styles.linkItem}><span className={styles.linkArrow}>&gt;</span> Our Fleet</Link></li>
+              <li><Link href="/blog" className={styles.linkItem}><span className={styles.linkArrow}>&gt;</span> Blog</Link></li>
+              <li><Link href="/#booking" className={styles.linkItem}><span className={styles.linkArrow}>&gt;</span> Book Now</Link></li>
             </ul>
           </div>
           

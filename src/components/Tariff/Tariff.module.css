@@ -10,6 +10,14 @@
 .container {
   max-width: 1400px;
   margin: 0 auto;
+  width: 100%;
+}
+
+.mobileQuickCall {
+  display: none;
+}
+.desktopQuickCall {
+  display: block;
 }
 
 /* Banner Header Area */
@@ -84,11 +92,10 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  background-color: #ffffff;
-  border: 1px solid #e1eedb;
+  background: linear-gradient(135deg, #4C7A34 0%, #2f4a1e 100%);
   border-radius: 20px;
   padding: 16px 28px;
-  box-shadow: 0 10px 30px rgba(76, 122, 52, 0.08);
+  box-shadow: 0 10px 24px rgba(76, 122, 52, 0.25);
   transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s ease;
   cursor: pointer;
   text-decoration: none;
@@ -96,25 +103,25 @@
 }
 
 .quickCallCard:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 35px rgba(76, 122, 52, 0.12);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px rgba(76, 122, 52, 0.35);
 }
 
 .phoneIconWrapper {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background-color: #F1F6DD;
-  color: #4C7A34;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .quickCallCard:hover .phoneIconWrapper {
-  background-color: #4C7A34;
-  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
 }
 
 .quickCallText {
@@ -123,18 +130,19 @@
 }
 
 .quickCallLabel {
-  font-size: 12px;
-  color: #777777;
-  font-weight: 600;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
 }
 
 .quickCallPhone {
-  font-size: 18px;
-  font-weight: 700;
-  color: #1a2315;
+  font-size: 20px;
+  font-weight: 800;
+  color: #ffffff;
   margin-top: 2px;
+  letter-spacing: -0.5px;
 }
 
 /* Main Grid Layout */
@@ -149,12 +157,14 @@
   display: flex;
   flex-direction: column;
   gap: 40px;
+  min-width: 0;
 }
 
 .tableBlock {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  min-width: 0;
 }
 
 .tableHeaderSection {
@@ -195,11 +205,33 @@
   border: 1px solid #ebf2e7;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.02);
   overflow: hidden;
+  min-width: 0;
 }
 
 .responsiveTable {
   overflow-x: auto;
   width: 100%;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 8px;
+}
+
+/* Custom Scrollbar Styles for horizontal slider */
+.responsiveTable::-webkit-scrollbar {
+  height: 6px;
+}
+
+.responsiveTable::-webkit-scrollbar-track {
+  background: #edf4eb;
+  border-radius: 10px;
+}
+
+.responsiveTable::-webkit-scrollbar-thumb {
+  background: #4C7A34;
+  border-radius: 10px;
+}
+
+.responsiveTable::-webkit-scrollbar-thumb:hover {
+  background: #355227;
 }
 
 .pricingTable {
@@ -209,14 +241,25 @@
 }
 
 .pricingTable th {
-  background-color: #4C7A34;
+  background-color: #355227;
   color: #ffffff;
-  padding: 18px 20px;
+  padding: 16px 12px;
   font-weight: 600;
-  font-size: 13px;
+  font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pricingTable th:first-child,
+.pricingTable td:first-child {
+  padding-left: 24px;
+}
+
+.pricingTable th:last-child,
+.pricingTable td:last-child {
+  padding-right: 24px;
+  border-right: none;
 }
 
 .pricingTable th:last-child {
@@ -235,7 +278,7 @@
 }
 
 .pricingTable td {
-  padding: 16px 20px;
+  padding: 16px 12px;
   border-bottom: 1px solid #edf4eb;
   border-right: 1px solid #edf4eb;
   color: #333333;
@@ -288,6 +331,7 @@
   font-size: 14px;
   font-weight: 600;
   color: #1A2315;
+  white-space: nowrap;
 }
 
 .priceCell {
@@ -302,6 +346,16 @@
   font-weight: 600;
   color: #555555;
   text-align: center;
+}
+
+.extraBadge {
+  background-color: #E2ECD8;
+  color: #355227;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  display: inline-block;
 }
 
 /* Right Column: Quick Call + Types of Car Rentals */
@@ -323,10 +377,23 @@
 .typesHeader {
   display: flex;
   align-items: center;
-  gap: 14px;
+  justify-content: space-between;
   margin-bottom: 24px;
   border-bottom: 1px solid #edf4eb;
   padding-bottom: 18px;
+}
+
+.typesHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.accordionIcon {
+  color: #1a2315;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .typesIconBadge {
@@ -390,6 +457,81 @@
 .typeLink:hover {
   color: #0d47a1;
   transform: translateX(2px);
+}
+
+.viewMoreRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #edf4eb;
+  cursor: pointer;
+  color: #355227;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.viewMoreIconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  color: #355227;
+}
+
+/* Draggable Table Slider Container */
+.sliderContainer {
+  display: flex;
+  width: 100%;
+  padding: 16px 8px 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.customSlider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 120px;
+  height: 4px;
+  background: #edf4eb;
+  border-radius: 4px;
+  outline: none;
+  margin: 0 auto;
+}
+
+.customSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 8px;
+  border-radius: 4px;
+  background: #355227;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.customSlider::-webkit-slider-thumb:active {
+  background: #253d1a;
+  transform: scale(1.1);
+}
+
+.customSlider::-moz-range-thumb {
+  width: 20px;
+  height: 8px;
+  border-radius: 4px;
+  background: #355227;
+  cursor: pointer;
+  border: none;
+  transition: background 0.15s ease;
+}
+
+.customSlider::-moz-range-thumb:active {
+  background: #253d1a;
 }
 
 /* Bottom Details Row */
@@ -504,7 +646,7 @@
   .tariffSection {
     padding: 80px 32px;
   }
-  
+
   .title {
     font-size: 46px;
   }
@@ -537,6 +679,19 @@
 @media (max-width: 768px) {
   .tariffSection {
     padding: 60px 20px;
+  }
+
+  .mobileQuickCall {
+    display: block;
+    margin-bottom: 24px;
+  }
+
+  .desktopQuickCall {
+    display: none;
+  }
+
+  .pricingTable {
+    min-width: 540px;
   }
 
   .headerBanner {
@@ -578,9 +733,38 @@
   .quickCallPhone {
     font-size: 16px;
   }
-  
+
   .badgeItem {
     padding: 12px 16px;
     gap: 12px;
+  }
+
+  .pricingTable th {
+    padding: 12px 6px;
+    font-size: 10px;
+  }
+
+  .pricingTable td {
+    padding: 12px 6px;
+    font-size: 11px;
+  }
+
+  .pricingTable th:first-child,
+  .pricingTable td:first-child {
+    padding-left: 16px;
+  }
+
+  .pricingTable th:last-child,
+  .pricingTable td:last-child {
+    padding-right: 16px;
+  }
+
+  .carIconBadge {
+    width: 24px;
+    height: 24px;
+  }
+
+  .carCellContent {
+    gap: 8px;
   }
 }

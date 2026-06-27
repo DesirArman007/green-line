@@ -1,6 +1,6 @@
-/* Tariff Subpage Layout Styles - Matches Packages page layout style */
+/* Fleet Subpage Layout Styles - Matches Tariff page layout style */
 
-/* ---- Hero Banner (dark, consistent with packages page) ---- */
+/* ---- Hero Banner (dark, consistent with packages/tariff pages) ---- */
 .heroBanner {
   position: relative;
   background-color: #0D140F;
@@ -31,7 +31,7 @@
   left: 0;
   right: 0;
   height: 180px;
-  background: linear-gradient(to top, #F6FBF4 0%, transparent 100%);
+  background: linear-gradient(to top, #0D140F 0%, transparent 100%);
   z-index: 1;
   pointer-events: none;
 }
@@ -115,12 +115,11 @@
   margin: 0;
 }
 
-/* ---- Main Content (LIGHT theme, matching packages) ---- */
+/* ---- Main Content (DARK theme, matching homepage) ---- */
 .main {
-  background-color: #F6FBF4;
+  background-color: #0D140F;
   padding-bottom: 80px;
   position: relative;
-  overflow: hidden;
 }
 
 /* Ambient background lights (same as packages page) */
