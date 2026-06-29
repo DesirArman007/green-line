@@ -109,9 +109,15 @@ function ParallaxCard({ title, models, seats, price, features, bgImage }: Parall
               </li>
             ))}
           </ul>
-          <button className={styles.bookBtn}>
+          <a
+            href={`https://wa.me/918282825442?text=${encodeURIComponent(`Hello GreenLine, I'm interested in booking a ${title} (${models}). Please share availability and pricing.`)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.bookBtn}
+            style={{ textDecoration: 'none' }}
+          >
             Book Now <span>&rarr;</span>
-          </button>
+          </a>
         </div>
       </div>
     </div>

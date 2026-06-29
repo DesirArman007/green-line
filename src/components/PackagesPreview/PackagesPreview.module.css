@@ -309,6 +309,36 @@
   border-radius: 20px;
 }
 
+.footerRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.enquireBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--primary-green);
+  color: #0d140f;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  white-space: nowrap;
+}
+
+.enquireBtn:hover {
+  background: #d4f542;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(190, 235, 66, 0.3);
+}
+
 /* ---- CTA ---- */
 .ctaWrapper {
   display: flex;
@@ -404,20 +434,31 @@
   }
 
   .cardFooter {
-    flex-wrap: nowrap;
-    align-items: center;
+    flex-wrap: wrap;
+    align-items: flex-start;
     justify-content: space-between;
     padding-top: 12px;
+    gap: 10px;
   }
 
   .priceBlock {
     flex: 0 0 auto;
   }
 
+  .footerRight {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
   .vehicleBadge {
     flex: 0 0 auto;
     font-size: 10px;
     padding: 5px 8px;
+  }
+
+  .enquireBtn {
+    font-size: 11px;
+    padding: 6px 12px;
   }
 }
 

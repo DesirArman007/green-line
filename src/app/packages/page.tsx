@@ -184,7 +184,20 @@ export default function PackagesPage() {
                           </svg>
                           {pkg.vehicle}
                         </div>
-                        <button className={styles.enquireBtn}>
+                        <a
+                          href={`https://wa.me/918282825442?text=${encodeURIComponent(
+                            `Hi, I'm interested in the "${pkg.name}" package.\n\n` +
+                            `- Destination: ${pkg.destination}\n` +
+                            `- Duration: ${pkg.duration}\n` +
+                            `- Vehicle: ${pkg.vehicle}\n` +
+                            `- Price: ${pkg.price}\n\n` +
+                            `Please share more details and availability.`
+                          )}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={styles.enquireBtn}
+                          style={{ textDecoration: 'none' }}
+                        >
                           Enquire Now
                           <svg
                             width="14"
@@ -199,7 +212,7 @@ export default function PackagesPage() {
                             <line x1="5" y1="12" x2="19" y2="12" />
                             <polyline points="12 5 19 12 12 19" />
                           </svg>
-                        </button>
+                        </a>
                       </div>
                     </div>
                   </div>

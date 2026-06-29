@@ -27,21 +27,34 @@ export default function Booking() {
       return;
     }
     
-    setSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
-      setSubmitting(false);
-      setSubmitted(true);
-      setFormData({
-        name: '',
-        phone: '',
-        email: '',
-        serviceType: '',
-        message: ''
-      });
-      // Clear success message after 5 seconds
-      setTimeout(() => setSubmitted(false), 5000);
-    }, 1500);
+    let message = `Hello GreenLine, I'd like to enquire about a booking.\n\n` +
+      `- Name: ${formData.name}\n` +
+      `- Phone: ${formData.phone}\n`;
+    
+    if (formData.email) {
+      message += `- Email: ${formData.email}\n`;
+    }
+    if (formData.serviceType) {
+      message += `- Service Type: ${formData.serviceType}\n`;
+    }
+    if (formData.message) {
+      message += `- Details: ${formData.message}\n`;
+    }
+    
+    message += `\nPlease share availability and pricing.`;
+    
+    const encoded = encodeURIComponent(message);
+    window.open(`https://wa.me/918282825442?text=${encoded}`, '_blank');
+    
+    setSubmitted(true);
+    setFormData({
+      name: '',
+      phone: '',
+      email: '',
+      serviceType: '',
+      message: ''
+    });
+    setTimeout(() => setSubmitted(false), 5000);
   };
 
   return (

@@ -139,23 +139,30 @@ export default function SearchBar() {
       return;
     }
 
-    setSubmitting(true);
-    // Simulate booking API call
-    setTimeout(() => {
-      setSubmitting(false);
-      setSubmitted(true);
-      setFormData({
-        name: '',
-        phone: '',
-        carType: '',
-        pickupLocation: '',
-        dropLocation: '',
-        date: '',
-        time: '',
-      });
-      // Clear success state after 5 seconds
-      setTimeout(() => setSubmitted(false), 5000);
-    }, 1500);
+    const message = `Hello GreenLine, I'd like to book a cab.\n\n` +
+      `- Name: ${formData.name}\n` +
+      `- Phone: ${formData.phone}\n` +
+      `- Car Type: ${formData.carType}\n` +
+      `- Pickup: ${formData.pickupLocation}\n` +
+      `- Drop: ${formData.dropLocation}\n` +
+      `- Date: ${getDisplayDate(formData.date)}\n` +
+      `- Time: ${formData.time}\n\n` +
+      `Please confirm availability and pricing.`;
+    
+    const encoded = encodeURIComponent(message);
+    window.open(`https://wa.me/918282825442?text=${encoded}`, '_blank');
+    
+    setSubmitted(true);
+    setFormData({
+      name: '',
+      phone: '',
+      carType: '',
+      pickupLocation: '',
+      dropLocation: '',
+      date: '',
+      time: '',
+    });
+    setTimeout(() => setSubmitted(false), 5000);
   };
 
   const calendarDays = getDaysInMonth(currentMonth);

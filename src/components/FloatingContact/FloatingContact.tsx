@@ -8,7 +8,7 @@ export default function FloatingContact() {
     <div className={styles.container}>
       {/* WhatsApp Button */}
       <a
-        href="https://wa.me/919494052005"
+        href="https://wa.me/918282825442"
         target="_blank"
         rel="noopener noreferrer"
         className={`${styles.button} ${styles.whatsapp}`}
@@ -22,7 +22,7 @@ export default function FloatingContact() {
 
       {/* Call Button */}
       <a
-        href="tel:+919494052005"
+        href="tel:+918282825442"
         className={`${styles.button} ${styles.call}`}
         aria-label="Call Us Now"
       >
