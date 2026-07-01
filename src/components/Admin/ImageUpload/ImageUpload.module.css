@@ -1,0 +1,114 @@
+.container {
+  width: 100%;
+}
+
+.uploadCard {
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px dashed rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.2s ease;
+  max-width: 320px;
+}
+
+.uploadCard:hover {
+  border-color: rgba(163, 255, 18, 0.3);
+  background: rgba(163, 255, 18, 0.01);
+}
+
+.uploadCard.hasImage {
+  border-style: solid;
+}
+
+.previewArea {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0d0f12;
+}
+
+.previewImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.previewOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+}
+
+.previewArea:hover .previewOverlay {
+  opacity: 1;
+}
+
+label.changeLabel {
+  padding: 8px 16px;
+  background-color: #a3ff12 !important;
+  color: #000 !important;
+  border-radius: 6px;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(163, 255, 18, 0.25);
+  transition: all 0.2s ease;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+}
+
+label.changeLabel:hover {
+  background-color: #baff4d !important;
+  transform: translateY(-1px);
+}
+
+/* Dropzone styling */
+.dropzone {
+  position: relative;
+  padding: 32px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.uploadIcon {
+  color: #8b929e;
+  margin-bottom: 12px;
+  transition: color 0.2s ease;
+}
+
+.uploadCard:hover .uploadIcon {
+  color: #a3ff12;
+}
+
+.dropzoneText {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #e0e4eb;
+  margin-bottom: 4px;
+}
+
+.dropzoneSubtext {
+  font-size: 0.75rem;
+  color: #555c66;
+}
+
+.fileInput {
+  display: none;
+}
+
+.hiddenLabel {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+}

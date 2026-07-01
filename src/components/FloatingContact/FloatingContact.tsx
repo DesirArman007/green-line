@@ -1,9 +1,17 @@
 "use client";
 
 import React from 'react';
+import { usePathname } from 'next/navigation';
 import styles from './FloatingContact.module.css';
 
 export default function FloatingContact() {
+  const pathname = usePathname();
+
+  // Hide floating contact buttons on admin panel and login screen
+  if (pathname?.startsWith('/admin') || pathname?.startsWith('/login')) {
+    return null;
+  }
+
   return (
     <div className={styles.container}>
       {/* WhatsApp Button */}

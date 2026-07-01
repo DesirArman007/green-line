@@ -5,7 +5,11 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import styles from './Navbar.module.css';
 
-export default function Navbar() {
+interface NavbarProps {
+  forceSolid?: boolean;
+}
+
+export default function Navbar({ forceSolid = false }: NavbarProps = {}) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrollState, setScrollState] = useState<'top' | 'visible' | 'hidden'>('top');
   const pathname = usePathname();
@@ -38,7 +42,7 @@ export default function Navbar() {
 
   const navClasses = [
     styles.navbar,
-    scrollState !== 'top' ? styles.navbarScrolled : '',
+    (scrollState !== 'top' || forceSolid) ? styles.navbarScrolled : '',
     scrollState === 'hidden' ? styles.navbarHidden : '',
   ].filter(Boolean).join(' ');
 

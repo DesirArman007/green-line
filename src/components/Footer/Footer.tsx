@@ -95,16 +95,16 @@ export default function Footer() {
                   <circle cx="17" cy="17" r="2"></circle>
                 </svg>
               </div>
-              <h4>Our Services</h4>
+              <h4>Explore More</h4>
             </div>
             <div className={styles.headerLine}></div>
             
             <ul className={styles.linkList}>
-              <li><a href="#" className={styles.linkItem}><span className={styles.linkArrow}>&gt;</span> Local City Rides</a></li>
-              <li><a href="#" className={styles.linkItem}><span className={styles.linkArrow}>&gt;</span> Airport Transfers</a></li>
-              <li><a href="#" className={styles.linkItem}><span className={styles.linkArrow}>&gt;</span> Outstation Trips</a></li>
-              <li><a href="#" className={styles.linkItem}><span className={styles.linkArrow}>&gt;</span> Corporate Travel</a></li>
-              <li><a href="#" className={styles.linkItem}><span className={styles.linkArrow}>&gt;</span> Wedding Car Rentals</a></li>
+              <li><Link href="/packages" className={styles.linkItem}><span className={styles.linkArrow}>&gt;</span> Tour Packages</Link></li>
+              <li><Link href="/tariff" className={styles.linkItem}><span className={styles.linkArrow}>&gt;</span> Tariffs & Pricing</Link></li>
+              <li><Link href="/testimonials" className={styles.linkItem}><span className={styles.linkArrow}>&gt;</span> Testimonials</Link></li>
+              <li><Link href="/#video-testimonials" className={styles.linkItem}><span className={styles.linkArrow}>&gt;</span> Video Testimonials</Link></li>
+              <li><Link href="/blog" className={styles.linkItem}><span className={styles.linkArrow}>&gt;</span> Travel Blog</Link></li>
             </ul>
           </div>
           
