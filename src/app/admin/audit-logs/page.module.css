@@ -1,0 +1,68 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.header {
+  margin-bottom: 16px;
+}
+
+.header h1 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+.header p {
+  color: #b0b7c3;
+  font-size: 1.1rem;
+}
+
+.errorCard {
+  background-color: rgba(255, 74, 74, 0.1);
+  border: 1px solid rgba(255, 74, 74, 0.2);
+  border-radius: 8px;
+  padding: 32px;
+  text-align: center;
+  margin-top: 48px;
+}
+
+.errorCard h2 {
+  color: #ff4a4a;
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.errorCard p {
+  color: #e0e4eb;
+  font-size: 1.1rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.create {
+  background-color: rgba(163, 255, 18, 0.1);
+  color: #a3ff12;
+  border: 1px solid rgba(163, 255, 18, 0.2);
+}
+
+.update {
+  background-color: rgba(56, 189, 248, 0.1);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+.delete {
+  background-color: rgba(255, 74, 74, 0.1);
+  color: #ff4a4a;
+  border: 1px solid rgba(255, 74, 74, 0.2);
+}
