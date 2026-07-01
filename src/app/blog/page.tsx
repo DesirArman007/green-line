@@ -5,7 +5,8 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar/Navbar';
 import Footer from '@/components/Footer/Footer';
-import { blogPosts, categoryLabels, type BlogPost } from '@/data/blogData';
+import { categoryLabels, type BlogPost } from '@/data/blogData';
+import { createClient } from '@/utils/supabase/client';
 import styles from './page.module.css';
 
 const categories = Object.keys(categoryLabels);
@@ -13,17 +14,49 @@ const categories = Object.keys(categoryLabels);
 export default function BlogPage() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const supabase = createClient();
+
+  useEffect(() => {
+    async function loadBlogs() {
+      setIsLoading(true);
+      const { data, error } = await supabase
+        .from('blogs')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (!error && data) {
+        setBlogPosts(
+          data.map((d: any) => ({
+            id: d.id,
+            title: d.title,
+            excerpt: d.excerpt,
+            content: d.content,
+            date: d.date,
+            category: d.category,
+            image: d.image_url,
+            readTime: d.read_time || '5 min read',
+            author: d.author,
+          }))
+        );
+      }
+      setIsLoading(false);
+    }
+    loadBlogs();
+  }, []);
 
   // Handle hash navigation to open a blog post directly
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.location.hash) {
+    if (blogPosts.length > 0 && typeof window !== 'undefined' && window.location.hash) {
       const hash = window.location.hash.substring(1);
       const post = blogPosts.find((p) => p.id === hash);
       if (post) {
         setSelectedPost(post);
       }
     }
-  }, []);
+  }, [blogPosts]);
 
   const filteredPosts =
     activeCategory === 'all'
