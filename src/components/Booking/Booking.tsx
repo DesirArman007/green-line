@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import { createClient } from '@/utils/supabase/client';
 import styles from './Booking.module.css';
 
 export default function Booking() {
@@ -20,41 +21,60 @@ export default function Booking() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.phone) {
       alert("Please fill in all required fields.");
       return;
     }
     
-    let message = `Hello GreenLine, I'd like to enquire about a booking.\n\n` +
-      `- Name: ${formData.name}\n` +
-      `- Phone: ${formData.phone}\n`;
+    setSubmitting(true);
     
-    if (formData.email) {
-      message += `- Email: ${formData.email}\n`;
+    try {
+      const supabase = createClient();
+      const { error } = await supabase.from('contact_enquiries').insert([{
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email || null,
+        service_type: formData.serviceType || null,
+        message: formData.message || null
+      }]);
+
+      if (error) throw error;
+
+      let message = `Hello GreenLine, I'd like to enquire about a booking.\n\n` +
+        `- Name: ${formData.name}\n` +
+        `- Phone: ${formData.phone}\n`;
+      
+      if (formData.email) {
+        message += `- Email: ${formData.email}\n`;
+      }
+      if (formData.serviceType) {
+        message += `- Service Type: ${formData.serviceType}\n`;
+      }
+      if (formData.message) {
+        message += `- Details: ${formData.message}\n`;
+      }
+      
+      message += `\nPlease share availability and pricing.`;
+      
+      const encoded = encodeURIComponent(message);
+      window.open(`https://wa.me/918282825442?text=${encoded}`, '_blank');
+      
+      setSubmitted(true);
+      setFormData({
+        name: '',
+        phone: '',
+        email: '',
+        serviceType: '',
+        message: ''
+      });
+      setTimeout(() => setSubmitted(false), 5000);
+    } catch (err: any) {
+      alert(err.message || "Failed to submit enquiry. Please try again.");
+    } finally {
+      setSubmitting(false);
     }
-    if (formData.serviceType) {
-      message += `- Service Type: ${formData.serviceType}\n`;
-    }
-    if (formData.message) {
-      message += `- Details: ${formData.message}\n`;
-    }
-    
-    message += `\nPlease share availability and pricing.`;
-    
-    const encoded = encodeURIComponent(message);
-    window.open(`https://wa.me/918282825442?text=${encoded}`, '_blank');
-    
-    setSubmitted(true);
-    setFormData({
-      name: '',
-      phone: '',
-      email: '',
-      serviceType: '',
-      message: ''
-    });
-    setTimeout(() => setSubmitted(false), 5000);
   };
 
   return (
