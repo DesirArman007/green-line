@@ -1,48 +1,44 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { createClient } from '@/utils/supabase/client';
+import Link from 'next/link';
 import styles from './Testimonials.module.css';
 
-const testimonialList = [
-  {
-    name: 'Bessie Cooper',
-    image: '/images/testimonial_bessie.png',
-    quote: '“ Professional service and pricing The car condition was excellent customer support was very responsive. ”',
-    company: 'CEO, Cooper Tech'
-  },
-  {
-    name: 'Devon Lane',
-    image: '/images/testimonial_devon.png',
-    quote: '“ Professional service and pricing The car condition was excellent customer support was very responsive. ”',
-    company: 'Founder, Lane Agency'
-  },
-  {
-    name: 'Leslie Alexander',
-    image: '/images/testimonial_leslie.png',
-    quote: '“ Professional service and pricing The car condition was excellent customer support was very responsive. ”',
-    company: 'Director, Alexander Co.'
-  },
-  {
-    name: 'Annette Black',
-    image: '/images/testimonial_annette.png',
-    quote: '“ Professional service and pricing The car condition was excellent customer support was very responsive. ”',
-    company: 'Director, Black Design'
-  }
-];
-
 export default function Testimonials() {
+  const [testimonials, setTestimonials] = useState<any[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [showAll, setShowAll] = useState(false);
+  const supabase = createClient();
+
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      const { data, error } = await supabase.from('testimonials').select('*').order('is_featured', { ascending: false }).order('created_at', { ascending: false }).order('id', { ascending: true });
+      if (data && !error) {
+        setTestimonials(data);
+      }
+    };
+    fetchTestimonials();
+  }, []);
+
+  if (testimonials.length === 0) {
+    return null; // Return empty or a loading state while fetching
+  }
+
+  const featuredTestimonials = testimonials.filter(t => t.is_featured);
+  const defaultTestimonials = featuredTestimonials.length > 0 ? featuredTestimonials : testimonials.slice(0, 4);
+  const visibleTestimonials = showAll ? testimonials : defaultTestimonials;
 
   const handleNext = () => {
     setDirection(1);
-    setActiveIndex((prev) => (prev + 1) % testimonialList.length);
+    setActiveIndex((prev) => (prev + 1) % visibleTestimonials.length);
   };
 
   const handlePrev = () => {
     setDirection(-1);
-    setActiveIndex((prev) => (prev - 1 + testimonialList.length) % testimonialList.length);
+    setActiveIndex((prev) => (prev - 1 + visibleTestimonials.length) % visibleTestimonials.length);
   };
 
   const slideVariants = {
@@ -60,7 +56,17 @@ export default function Testimonials() {
     })
   };
 
-  const current = testimonialList[activeIndex];
+  const current = visibleTestimonials[activeIndex];
+
+  const renderStars = (rating: number) => {
+    return (
+      <div className={styles.stars}>
+        {Array.from({ length: 5 }).map((_, i) => (
+          <span key={i} className={styles.star} style={{ opacity: i < rating ? 1 : 0.3 }}>★</span>
+        ))}
+      </div>
+    );
+  };
 
   return (
     <section className={styles.testimonialsSection}>
@@ -84,37 +90,49 @@ export default function Testimonials() {
 
         {/* Desktop Grid Layout (Visible on desktop) */}
         <div className={styles.desktopGrid}>
-          {testimonialList.map((item, idx) => (
+          {visibleTestimonials.map((item, idx) => (
             <div key={idx} className={styles.card}>
               <img 
-                src={item.image} 
+                src={item.image_url} 
                 alt={item.name} 
                 className={styles.cardImage} 
               />
               <div className={styles.overlay} />
 
               <div className={styles.cardContent}>
-                {/* 5-star rating */}
-                <div className={styles.stars}>
-                  <span className={styles.star}>★</span>
-                  <span className={styles.star}>★</span>
-                  <span className={styles.star}>★</span>
-                  <span className={styles.star}>★</span>
-                  <span className={styles.star}>★</span>
-                </div>
+                {/* Dynamic star rating */}
+                {renderStars(item.rating || 5)}
                 
                 {/* Quote */}
-                <p className={styles.quote}>{item.quote}</p>
+                <p className={styles.quote}>{item.text}</p>
 
                 {/* Customer Name & Company */}
                 <div>
                   <h3 className={styles.name}>{item.name}</h3>
-                  <span className={styles.company}>{item.company}</span>
+                  <span className={styles.company}>{item.role}</span>
                 </div>
               </div>
             </div>
           ))}
         </div>
+
+        {/* View All Button for Desktop */}
+        {testimonials.length > defaultTestimonials.length && (
+          <div className={styles.viewAllWrapper}>
+            <Link 
+              href="/testimonials"
+              className={styles.ctaButton} 
+            >
+              View All Testimonials
+              <span className={styles.ctaArrow}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </span>
+            </Link>
+          </div>
+        )}
 
         {/* Mobile Slider Container (Visible on mobile/tablet) */}
         <div className={styles.sliderWrapper}>
@@ -143,7 +161,7 @@ export default function Testimonials() {
                 <div className={styles.card}>
                   {/* Image Background */}
                   <img 
-                    src={current.image} 
+                    src={current.image_url} 
                     alt={current.name} 
                     className={styles.cardImage} 
                   />
@@ -151,22 +169,16 @@ export default function Testimonials() {
 
                   {/* Text content overlay */}
                   <div className={styles.cardContent}>
-                    {/* 5-star rating */}
-                    <div className={styles.stars}>
-                      <span className={styles.star}>★</span>
-                      <span className={styles.star}>★</span>
-                      <span className={styles.star}>★</span>
-                      <span className={styles.star}>★</span>
-                      <span className={styles.star}>★</span>
-                    </div>
+                    {/* Dynamic star rating */}
+                    {renderStars(current.rating || 5)}
                     
                     {/* Quote */}
-                    <p className={styles.quote}>{current.quote}</p>
+                    <p className={styles.quote}>{current.text}</p>
 
                     {/* Customer Name & Company */}
                     <div>
                       <h3 className={styles.name}>{current.name}</h3>
-                      <span className={styles.company}>{current.company}</span>
+                      <span className={styles.company}>{current.role}</span>
                     </div>
                   </div>
                 </div>
@@ -187,7 +199,7 @@ export default function Testimonials() {
 
         {/* Dot Indicators */}
         <div className={styles.dotsContainer}>
-          {testimonialList.map((_, idx) => (
+          {testimonials.map((_, idx) => (
             <button
               key={idx}
               className={`${styles.dot} ${idx === activeIndex ? styles.dotActive : ''}`}
