@@ -1,14 +1,42 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { blogPosts, categoryLabels } from '@/data/blogData';
+import { categoryLabels } from '@/data/blogData';
+import { createClient } from '@/utils/supabase/client';
 import styles from './BlogPreview.module.css';
 
 export default function BlogPreview() {
-  // Show all 3 posts as featured preview
-  const featuredBlogs = blogPosts.slice(0, 3);
+  const [featuredBlogs, setFeaturedBlogs] = useState<any[]>([]);
+  const supabase = createClient();
+
+  useEffect(() => {
+    async function loadFeaturedBlogs() {
+      const { data, error } = await supabase
+        .from('blogs')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .limit(3);
+
+      if (!error && data) {
+        setFeaturedBlogs(
+          data.map((d: any) => ({
+            id: d.id,
+            title: d.title,
+            excerpt: d.excerpt,
+            content: d.content,
+            date: d.date,
+            category: d.category,
+            image: d.image_url,
+            readTime: d.read_time || '5 min read',
+            author: d.author,
+          }))
+        );
+      }
+    }
+    loadFeaturedBlogs();
+  }, []);
 
   return (
     <section className={styles.section} id="blog">

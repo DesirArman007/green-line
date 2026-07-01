@@ -1,17 +1,102 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar/Navbar';
 import Footer from '@/components/Footer/Footer';
-import { tourPackages, categoryLabels, type TourPackage } from '@/data/packagesData';
+import { categoryLabels, type TourPackage } from '@/data/packagesData';
+import { createClient } from '@/utils/supabase/client';
 import styles from './page.module.css';
 
 const categories = Object.keys(categoryLabels);
 
 export default function PackagesPage() {
   const [activeCategory, setActiveCategory] = useState('all');
+  const [tourPackages, setTourPackages] = useState<TourPackage[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Enquiry modal states
+  const [isEnquiryModalOpen, setIsEnquiryModalOpen] = useState(false);
+  const [selectedPkg, setSelectedPkg] = useState<TourPackage | null>(null);
+  const [enquirerName, setEnquirerName] = useState('');
+  const [enquirerPhone, setEnquirerPhone] = useState('');
+  const [isSubmittingEnquiry, setIsSubmittingEnquiry] = useState(false);
+
+  const supabase = createClient();
+
+  useEffect(() => {
+    async function loadPackages() {
+      setIsLoading(true);
+      const { data, error } = await supabase
+        .from('packages')
+        .select('*');
+
+      if (!error && data) {
+        setTourPackages(
+          data.map((d: any) => ({
+            id: d.id,
+            name: d.name,
+            destination: d.destination,
+            duration: d.duration,
+            days: 1, // default placeholders
+            nights: 0,
+            price: d.price,
+            priceValue: parseInt(d.price.replace(/[^0-9]/g, '')) || 0,
+            vehicle: d.vehicle,
+            image: d.image_url,
+            highlights: d.highlights || [],
+            category: d.category,
+            featured: false, // fallback, since it's preview only
+            description: d.description,
+          }))
+        );
+      }
+      setIsLoading(false);
+    }
+    loadPackages();
+  }, []);
+
+  const handleEnquirySubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedPkg || !enquirerName || !enquirerPhone) return;
+
+    setIsSubmittingEnquiry(true);
+    try {
+      const { error } = await supabase.from('package_enquiries').insert([{
+        name: enquirerName,
+        phone: enquirerPhone,
+        package_name: selectedPkg.name,
+        destination: selectedPkg.destination,
+        duration: selectedPkg.duration,
+        vehicle: selectedPkg.vehicle,
+        price: selectedPkg.price,
+      }]);
+
+      if (error) throw error;
+
+      // Format WhatsApp message
+      const message = `Hi, I'm interested in the "${selectedPkg.name}" package.\n\n` +
+        `- Destination: ${selectedPkg.destination}\n` +
+        `- Duration: ${selectedPkg.duration}\n` +
+        `- Vehicle: ${selectedPkg.vehicle}\n` +
+        `- Price: ${selectedPkg.price}\n\n` +
+        `Please share more details and availability.`;
+
+      const encoded = encodeURIComponent(message);
+      window.open(`https://wa.me/918282825442?text=${encoded}`, '_blank');
+
+      // Reset and close
+      setEnquirerName('');
+      setEnquirerPhone('');
+      setIsEnquiryModalOpen(false);
+      setSelectedPkg(null);
+    } catch (err: any) {
+      alert(err.message || 'Failed to submit enquiry. Please try again.');
+    } finally {
+      setIsSubmittingEnquiry(false);
+    }
+  };
 
   const filtered: TourPackage[] =
     activeCategory === 'all'
@@ -184,19 +269,12 @@ export default function PackagesPage() {
                           </svg>
                           {pkg.vehicle}
                         </div>
-                        <a
-                          href={`https://wa.me/918282825442?text=${encodeURIComponent(
-                            `Hi, I'm interested in the "${pkg.name}" package.\n\n` +
-                            `- Destination: ${pkg.destination}\n` +
-                            `- Duration: ${pkg.duration}\n` +
-                            `- Vehicle: ${pkg.vehicle}\n` +
-                            `- Price: ${pkg.price}\n\n` +
-                            `Please share more details and availability.`
-                          )}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                        <button
+                          onClick={() => {
+                            setSelectedPkg(pkg);
+                            setIsEnquiryModalOpen(true);
+                          }}
                           className={styles.enquireBtn}
-                          style={{ textDecoration: 'none' }}
                         >
                           Enquire Now
                           <svg
@@ -212,7 +290,7 @@ export default function PackagesPage() {
                             <line x1="5" y1="12" x2="19" y2="12" />
                             <polyline points="12 5 19 12 12 19" />
                           </svg>
-                        </a>
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -253,6 +331,53 @@ export default function PackagesPage() {
       </main>
 
       <Footer />
+
+      {/* Enquiry Modal */}
+      {isEnquiryModalOpen && selectedPkg && (
+        <div className={styles.modalOverlay} onClick={() => setIsEnquiryModalOpen(false)}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <button className={styles.closeBtn} onClick={() => setIsEnquiryModalOpen(false)} aria-label="Close modal">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+            <div className={styles.modalHeader}>
+              <h3 className={styles.modalTitle}>Enquire Now</h3>
+              <p className={styles.modalSubtitle}>Please share your details to proceed with WhatsApp enquiry for <strong>{selectedPkg.name}</strong></p>
+            </div>
+            <form onSubmit={handleEnquirySubmit} className={styles.enquiryForm}>
+              <div className={styles.inputGroup}>
+                <label>Full Name*</label>
+                <input 
+                  type="text" 
+                  required 
+                  placeholder="Your full name" 
+                  value={enquirerName} 
+                  onChange={e => setEnquirerName(e.target.value)} 
+                />
+              </div>
+              <div className={styles.inputGroup}>
+                <label>Phone Number*</label>
+                <input 
+                  type="tel" 
+                  required 
+                  placeholder="+91 9XXXXXXXXX" 
+                  value={enquirerPhone} 
+                  onChange={e => setEnquirerPhone(e.target.value)} 
+                />
+              </div>
+              <button 
+                type="submit" 
+                className={styles.modalSubmitBtn}
+                disabled={isSubmittingEnquiry}
+              >
+                {isSubmittingEnquiry ? 'Submitting...' : 'Proceed to WhatsApp'}
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </>
   );
 }

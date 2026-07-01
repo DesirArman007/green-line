@@ -33,7 +33,7 @@ export default function Home() {
       <PackagesPreview />
       <Fleet />
       <Testimonials />
-      <VideoTestimonials />
+      <VideoTestimonials featuredOnly={true} />
       <BlogPreview />
       <Contact />
       <Booking />

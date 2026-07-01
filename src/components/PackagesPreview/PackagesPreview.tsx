@@ -1,14 +1,46 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { tourPackages } from '@/data/packagesData';
+import { createClient } from '@/utils/supabase/client';
 import styles from './PackagesPreview.module.css';
 
-const featuredPackages = tourPackages.filter((pkg) => pkg.featured);
-
 export default function PackagesPreview() {
+  const [featuredPackages, setFeaturedPackages] = useState<any[]>([]);
+  const supabase = createClient();
+
+  useEffect(() => {
+    async function loadFeaturedPackages() {
+      // Query the first 4 packages (since they are our seeded packages and should be displayed as featured)
+      const { data, error } = await supabase
+        .from('packages')
+        .select('*')
+        .limit(4);
+
+      if (!error && data) {
+        setFeaturedPackages(
+          data.map((d: any) => ({
+            id: d.id,
+            name: d.name,
+            destination: d.destination,
+            duration: d.duration,
+            days: 1,
+            nights: 0,
+            price: d.price,
+            priceValue: parseInt(d.price.replace(/[^0-9]/g, '')) || 0,
+            vehicle: d.vehicle,
+            image: d.image_url,
+            highlights: d.highlights || [],
+            category: d.category,
+            featured: true, // Mark all returned as featured for the preview section
+            description: d.description,
+          }))
+        );
+      }
+    }
+    loadFeaturedPackages();
+  }, []);
   return (
     <section className={styles.section}>
       <div className={styles.container}>
@@ -109,7 +141,7 @@ export default function PackagesPreview() {
 
                 {/* Highlights */}
                 <ul className={styles.highlights}>
-                  {pkg.highlights.slice(0, 2).map((h, i) => (
+                  {pkg.highlights.slice(0, 2).map((h: string, i: number) => (
                     <li key={i}>
                       <span className={styles.highlightDot} />
                       {h}

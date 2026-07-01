@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './Tariff.module.css';
+import { createClient } from '@/utils/supabase/client';
 
 interface TableScrollSliderProps {
   elementRef: React.RefObject<HTMLDivElement | null>;
@@ -80,37 +81,28 @@ const outstationPricingData = [
   { car: "Tempo - 17", minKm: "400 Km", perKm: "₹38/-", beta: "₹1,000/-", tollParking: "Extra" }
 ];
 
-const carRentalTypesLeft = [
-  "corolla hire Vijayawada",
-  "indica hire Vijayawada",
-  "ikon hire Vijayawada",
-  "honda city hire Vijayawada",
-  "honda accord hire Vijayawada",
-  "camry hire Vijayawada",
-  "corolla hire Vijayawada",
-  "innova hire Vijayawada",
-  "honda crv hire Vijayawada"
-];
-
-const carRentalTypesRight = [
-  "tempo traveller hire Vijayawada",
-  "coach hire in Vijayawada",
-  "Car hire Vijayawada",
-  "fiesta hire Vijayawada",
-  "fortuner hire Vijayawada",
-  "indigo hire Vijayawada",
-  "BMW 7 series hire Vijayawada",
-  "BMW 5 series hire Vijayawada",
-  "7 series hire Vijayawada",
-  "5 series hire Vijayawada"
-];
+// Backlinks will be fetched from database
 
 export default function Tariff() {
   const [typesExpanded, setTypesExpanded] = useState(true);
   const [typesShowAll, setTypesShowAll] = useState(false);
+  const [backlinksLeft, setBacklinksLeft] = useState<{keyword: string, link_url: string}[]>([]);
+  const [backlinksRight, setBacklinksRight] = useState<{keyword: string, link_url: string}[]>([]);
 
   const localTableRef = useRef<HTMLDivElement>(null);
   const outstationTableRef = useRef<HTMLDivElement>(null);
+  const supabase = createClient();
+
+  useEffect(() => {
+    async function fetchBacklinks() {
+      const { data } = await supabase.from('tariff_backlinks').select('*');
+      if (data) {
+        setBacklinksLeft(data.filter(d => d.column_side === 'left'));
+        setBacklinksRight(data.filter(d => d.column_side === 'right'));
+      }
+    }
+    fetchBacklinks();
+  }, []);
 
   return (
     <section className={styles.tariffSection}>
@@ -376,18 +368,18 @@ export default function Tariff() {
                 <>
                   <div className={styles.typesListGrid}>
                     <ul className={styles.typesList}>
-                      {carRentalTypesLeft.slice(0, typesShowAll ? undefined : 5).map((item, idx) => (
+                      {backlinksLeft.slice(0, typesShowAll ? undefined : 5).map((item, idx) => (
                         <li key={idx}>
                           <span className={styles.chevron}>&gt;</span>
-                          <a href="#booking" className={styles.typeLink}>{item}</a>
+                          <a href={item.link_url} className={styles.typeLink}>{item.keyword}</a>
                         </li>
                       ))}
                     </ul>
                     <ul className={styles.typesList}>
-                      {carRentalTypesRight.slice(0, typesShowAll ? undefined : 5).map((item, idx) => (
+                      {backlinksRight.slice(0, typesShowAll ? undefined : 5).map((item, idx) => (
                         <li key={idx}>
                           <span className={styles.chevron}>&gt;</span>
-                          <a href="#booking" className={styles.typeLink}>{item}</a>
+                          <a href={item.link_url} className={styles.typeLink}>{item.keyword}</a>
                         </li>
                       ))}
                     </ul>
