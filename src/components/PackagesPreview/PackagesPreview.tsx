@@ -16,6 +16,8 @@ export default function PackagesPreview() {
       const { data, error } = await supabase
         .from('packages')
         .select('*')
+        .order('created_at', { ascending: true })
+        .order('id', { ascending: true })
         .limit(4);
 
       if (!error && data) {

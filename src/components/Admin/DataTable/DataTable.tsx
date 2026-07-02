@@ -1,4 +1,5 @@
 import React from 'react';
+import { Pencil, Trash2 } from 'lucide-react';
 import styles from './DataTable.module.css';
 
 interface Column<T> {
@@ -53,13 +54,15 @@ export default function DataTable<T extends { id: string }>({
                 <td className={styles.actionsCell}>
                   <div className={styles.actionsWrapper}>
                     {onEdit && (
-                      <button className={styles.editBtn} onClick={() => onEdit(row)}>
-                        Edit
+                      <button className={styles.editBtn} onClick={() => onEdit(row)} title="Edit">
+                        <Pencil size={12} className={styles.btnIcon} />
+                        <span>Edit</span>
                       </button>
                     )}
                     {onDelete && (
-                      <button className={styles.deleteBtn} onClick={() => onDelete(row)}>
-                        Delete
+                      <button className={styles.deleteBtn} onClick={() => onDelete(row)} title="Delete">
+                        <Trash2 size={12} className={styles.btnIcon} />
+                        <span>Delete</span>
                       </button>
                     )}
                   </div>

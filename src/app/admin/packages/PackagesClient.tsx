@@ -22,7 +22,7 @@ export default function PackagesClient({ userEmail }: { userEmail: string }) {
 
   const fetchPackages = async () => {
     setIsLoading(true);
-    const { data, error } = await supabase.from('packages').select('*').order('created_at', { ascending: false });
+    const { data, error } = await supabase.from('packages').select('*').order('created_at', { ascending: false }).order('id', { ascending: true });
     if (!error && data) {
       setPackages(data);
     }
@@ -142,6 +142,7 @@ export default function PackagesClient({ userEmail }: { userEmail: string }) {
               folder="packages" 
               currentImage={currentPackage.image_url}
               onUploadSuccess={(url) => setCurrentPackage({ ...currentPackage, image_url: url })}
+              dimensions="800 x 500 px (Landscape)"
             />
           </div>
 
@@ -150,6 +151,7 @@ export default function PackagesClient({ userEmail }: { userEmail: string }) {
               <label>Name</label>
               <input 
                 required 
+                maxLength={100}
                 value={currentPackage.name} 
                 onChange={e => setCurrentPackage({ ...currentPackage, name: e.target.value })} 
               />
@@ -158,6 +160,7 @@ export default function PackagesClient({ userEmail }: { userEmail: string }) {
               <label>Destination</label>
               <input 
                 required 
+                maxLength={100}
                 value={currentPackage.destination} 
                 onChange={e => setCurrentPackage({ ...currentPackage, destination: e.target.value })} 
               />
@@ -166,6 +169,7 @@ export default function PackagesClient({ userEmail }: { userEmail: string }) {
               <label>Duration (e.g., 2 Days)</label>
               <input 
                 required 
+                maxLength={50}
                 value={currentPackage.duration} 
                 onChange={e => setCurrentPackage({ ...currentPackage, duration: e.target.value })} 
               />
@@ -174,6 +178,7 @@ export default function PackagesClient({ userEmail }: { userEmail: string }) {
               <label>Price</label>
               <input 
                 required 
+                maxLength={20}
                 value={currentPackage.price} 
                 onChange={e => setCurrentPackage({ ...currentPackage, price: e.target.value })} 
               />
@@ -181,6 +186,7 @@ export default function PackagesClient({ userEmail }: { userEmail: string }) {
             <div className={styles.formGroup}>
               <label>Vehicle</label>
               <input 
+                maxLength={50}
                 value={currentPackage.vehicle || ''} 
                 onChange={e => setCurrentPackage({ ...currentPackage, vehicle: e.target.value })} 
               />
@@ -188,6 +194,7 @@ export default function PackagesClient({ userEmail }: { userEmail: string }) {
             <div className={styles.formGroup}>
               <label>Category</label>
               <input 
+                maxLength={50}
                 value={currentPackage.category || ''} 
                 onChange={e => setCurrentPackage({ ...currentPackage, category: e.target.value })} 
               />

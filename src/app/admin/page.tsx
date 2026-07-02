@@ -115,7 +115,7 @@ export default async function AdminDashboard() {
           {/* Recent Bookings Card */}
           <div className={styles.sectionCard}>
             <h2>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a3ff12" strokeWidth="2.5" style={{ marginRight: '6px' }}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--admin-accent)" strokeWidth="2.5" style={{ marginRight: '6px' }}>
                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
                 <line x1="16" y1="2" x2="16" y2="6" />
                 <line x1="8" y1="2" x2="8" y2="6" />
@@ -153,7 +153,7 @@ export default async function AdminDashboard() {
           {/* Recent Package Enquiries Card */}
           <div className={styles.sectionCard}>
             <h2>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a3ff12" strokeWidth="2.5" style={{ marginRight: '6px' }}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--admin-accent)" strokeWidth="2.5" style={{ marginRight: '6px' }}>
                 <circle cx="12" cy="12" r="10" />
                 <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
               </svg>

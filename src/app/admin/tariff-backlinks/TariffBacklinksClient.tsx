@@ -20,7 +20,7 @@ export default function TariffBacklinksClient({ userEmail }: { userEmail: string
 
   const fetchItems = async () => {
     setIsLoading(true);
-    const { data, error } = await supabase.from('tariff_backlinks').select('*').order('created_at', { ascending: false });
+    const { data, error } = await supabase.from('tariff_backlinks').select('*').order('created_at', { ascending: false }).order('id', { ascending: true });
     if (!error && data) {
       setItems(data);
     }

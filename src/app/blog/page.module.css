@@ -500,6 +500,27 @@
   color: #333333;
 }
 
+.modalBody h1, .modalBody h2, .modalBody h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0d140f;
+  margin: 32px 0 16px;
+}
+
+.modalBody p {
+  margin-bottom: 20px;
+}
+
+.modalBody ul, .modalBody ol {
+  margin-bottom: 24px;
+  padding-left: 20px;
+}
+
+.modalBody ul li, .modalBody ol li {
+  margin-bottom: 8px;
+  list-style-type: disc;
+}
+
 .modalSubheading {
   font-size: 22px;
   font-weight: 700;

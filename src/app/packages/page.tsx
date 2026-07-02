@@ -11,6 +11,8 @@ import styles from './page.module.css';
 
 const categories = Object.keys(categoryLabels);
 
+const isHtml = (str: string) => /<[a-z][\s\S]*>/i.test(str);
+
 export default function PackagesPage() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [tourPackages, setTourPackages] = useState<TourPackage[]>([]);
@@ -30,7 +32,9 @@ export default function PackagesPage() {
       setIsLoading(true);
       const { data, error } = await supabase
         .from('packages')
-        .select('*');
+        .select('*')
+        .order('created_at', { ascending: true })
+        .order('id', { ascending: true });
 
       if (!error && data) {
         setTourPackages(
@@ -233,18 +237,24 @@ export default function PackagesPage() {
                         <span className={styles.destination}>{pkg.destination}</span>
                       </div>
                       <h3 className={styles.cardTitle}>{pkg.name}</h3>
-                      <p className={styles.cardDesc}>{pkg.description}</p>
+                      {isHtml(pkg.description || '') ? (
+                        <div className={styles.cardDesc} dangerouslySetInnerHTML={{ __html: pkg.description }} />
+                      ) : (
+                        <p className={styles.cardDesc}>{pkg.description}</p>
+                      )}
                     </div>
 
                     {/* Highlights */}
-                    <ul className={styles.highlights}>
-                      {pkg.highlights.map((h, i) => (
-                        <li key={i}>
-                          <span className={styles.highlightDot} />
-                          {h}
-                        </li>
-                      ))}
-                    </ul>
+                    {(!pkg.description?.includes('<ul>') && !pkg.description?.includes('<li>') && !pkg.description?.includes('<ol>')) && pkg.highlights && pkg.highlights.length > 0 && (
+                      <ul className={styles.highlights}>
+                        {pkg.highlights.map((h, i) => (
+                          <li key={i}>
+                            <span className={styles.highlightDot} />
+                            {h}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
 
                     {/* Footer */}
                     <div className={styles.cardFooter}>

@@ -116,6 +116,7 @@ export default function ClientLogosClient({ userEmail }: { userEmail: string }) 
               folder="clients" 
               currentImage={currentItem.logo_url}
               onUploadSuccess={(url) => setCurrentItem({ ...currentItem, logo_url: url })}
+              dimensions="300 x 150 px (Horizontal Logo)"
             />
           </div>
 
