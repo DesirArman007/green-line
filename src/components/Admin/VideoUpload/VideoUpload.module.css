@@ -3,34 +3,38 @@
 }
 
 .uploadCard {
-  background: var(--admin-card-bg);
-  border: 1px dashed var(--admin-input-border);
+  width: 100%;
+  max-width: 320px;
+  background-color: var(--admin-bg-secondary);
   border-radius: 12px;
+  border: 2px dashed var(--admin-border);
   overflow: hidden;
   transition: all 0.2s ease;
-  max-width: 320px;
+  position: relative;
 }
 
 .uploadCard:hover {
-  border-color: var(--admin-accent);
-  background: var(--admin-accent-light);
+  border-color: var(--primary-green);
+  background-color: rgba(76, 122, 52, 0.02);
 }
 
-.uploadCard.hasImage {
+.uploadCard.hasVideo {
   border-style: solid;
+  border-color: var(--admin-border);
 }
 
 .previewArea {
   position: relative;
-  width: 100%;
   aspect-ratio: 4 / 3;
+  width: 100%;
+  background-color: #000000;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--admin-bg);
+  overflow: hidden;
 }
 
-.previewImage {
+.previewVideo {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -54,68 +58,7 @@
   opacity: 1;
 }
 
-label.changeLabel {
-  padding: 8px 16px;
-  background-color: var(--admin-accent) !important;
-  color: #fff !important;
-  border-radius: 6px;
-  font-size: 0.85rem !important;
-  font-weight: 600 !important;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(76, 122, 52, 0.25);
-  transition: all 0.2s ease;
-  text-transform: none !important;
-  letter-spacing: normal !important;
-}
-
-label.changeLabel:hover {
-  background-color: var(--admin-accent-hover) !important;
-  transform: translateY(-1px);
-}
-
-/* Dropzone styling */
-.dropzone {
-  position: relative;
-  padding: 32px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.uploadIcon {
-  color: var(--admin-text-secondary);
-  margin-bottom: 12px;
-  transition: color 0.2s ease;
-}
-
-.uploadCard:hover .uploadIcon {
-  color: var(--admin-accent);
-}
-
-.dropzoneText {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--admin-text-primary);
-  margin-bottom: 4px;
-}
-
-.dropzoneSubtext {
-  font-size: 0.75rem;
-  color: var(--admin-text-muted);
-}
-
-.fileInput {
-  display: none;
-}
-
-.hiddenLabel {
-  position: absolute;
-  inset: 0;
-  cursor: pointer;
-}
-
-.viewBtn {
+.viewBtn, .changeLabel {
   display: inline-block;
   padding: 8px 16px;
   background-color: rgba(255, 255, 255, 0.9) !important;
@@ -131,9 +74,54 @@ label.changeLabel:hover {
   letter-spacing: normal !important;
 }
 
+.changeLabel {
+  background-color: var(--primary-green) !important;
+  color: #ffffff !important;
+}
+
 .viewBtn:hover {
   background-color: #ffffff !important;
   transform: translateY(-1px);
+}
+
+.changeLabel:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.dropzone {
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 180px;
+  cursor: pointer;
+  position: relative;
+}
+
+.uploadIcon {
+  color: var(--admin-text-muted);
+  margin-bottom: 12px;
+  transition: transform 0.2s ease;
+}
+
+.dropzone:hover .uploadIcon {
+  transform: translateY(-2px);
+  color: var(--primary-green);
+}
+
+.dropzoneText {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--admin-text);
+  margin-bottom: 4px;
+}
+
+.dropzoneSubtext {
+  font-size: 0.75rem;
+  color: var(--admin-text-muted);
 }
 
 .dropzoneDimensions {
@@ -151,4 +139,14 @@ label.changeLabel:hover {
   font-size: 0.8rem;
   color: var(--admin-text-secondary);
   margin: 6px 0 0 2px;
+}
+
+.fileInput {
+  display: none;
+}
+
+.hiddenLabel {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
 }

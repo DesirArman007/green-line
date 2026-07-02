@@ -139,6 +139,7 @@ export default function VehicleCategoriesClient({ userEmail }: { userEmail: stri
               folder="vehicles" 
               currentImage={currentItem.image_url}
               onUploadSuccess={(url) => setCurrentItem({ ...currentItem, image_url: url })}
+              dimensions="600 x 400 px (Landscape)"
             />
           </div>
 

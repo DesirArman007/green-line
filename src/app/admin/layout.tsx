@@ -77,13 +77,21 @@ export default async function AdminLayout({
     <div className={styles.adminLayout}>
       <aside className={styles.sidebar}>
         <div className={styles.sidebarHeader}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
             <div style={{ display: 'flex' }}>
-              <img src="/images/logo.png" alt="GreenLine Logo" style={{ width: '48px', height: '48px', objectFit: 'contain', filter: 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.4))' }} />
+              <img src="/images/logo.png" alt="GreenLine Logo" style={{ width: '56px', height: '56px', objectFit: 'contain', filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.06))' }} />
             </div>
             <h2 style={{ margin: 0 }}>Green Line</h2>
           </div>
-          <p className={styles.userEmail}>{user.email}</p>
+          <div className={styles.userProfileCard}>
+            <div className={styles.avatar}>
+              {user.email ? user.email.charAt(0).toUpperCase() : 'A'}
+            </div>
+            <div className={styles.userInfo}>
+              <span className={styles.userRole}>Administrator</span>
+              <span className={styles.userEmail} title={user.email}>{user.email}</span>
+            </div>
+          </div>
         </div>
         
         <AdminSidebarNav navCategories={navCategories} />

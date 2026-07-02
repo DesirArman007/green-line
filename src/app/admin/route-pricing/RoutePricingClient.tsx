@@ -24,7 +24,7 @@ export default function RoutePricingClient({ userEmail }: { userEmail: string })
   const fetchData = async () => {
     setIsLoading(true);
     const [pricingRes, categoriesRes] = await Promise.all([
-      supabase.from('route_pricing').select('*, vehicle_categories(name)').order('created_at', { ascending: false }),
+      supabase.from('route_pricing').select('*, vehicle_categories(name)').order('created_at', { ascending: false }).order('id', { ascending: true }),
       supabase.from('vehicle_categories').select('id, name').order('name')
     ]);
     
@@ -263,6 +263,7 @@ export default function RoutePricingClient({ userEmail }: { userEmail: string })
               folder="vehicles" 
               currentImage={currentItem.poster_image}
               onUploadSuccess={(url) => setCurrentItem({ ...currentItem, poster_image: url })}
+              dimensions="800 x 500 px (Landscape)"
             />
           </div>
 

@@ -20,7 +20,7 @@ export default function OutstationTariffsClient({ userEmail }: { userEmail: stri
 
   const fetchItems = async () => {
     setIsLoading(true);
-    const { data, error } = await supabase.from('outstation_tariffs').select('*').order('created_at', { ascending: false });
+    const { data, error } = await supabase.from('outstation_tariffs').select('*').order('created_at', { ascending: false }).order('id', { ascending: true });
     if (!error && data) {
       setItems(data);
     }

@@ -11,6 +11,8 @@ import styles from './page.module.css';
 
 const categories = Object.keys(categoryLabels);
 
+const isHtml = (str: string) => /<[a-z][\s\S]*>/i.test(str);
+
 export default function BlogPage() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
@@ -254,38 +256,42 @@ export default function BlogPage() {
 
               {/* Modal Content Body */}
               <div className={styles.modalBody}>
-                {selectedPost.content.split('\n\n').map((paragraph, index) => {
-                  const trimmed = paragraph.trim();
-                  if (!trimmed) return null;
+                {isHtml(selectedPost.content || '') ? (
+                  <div dangerouslySetInnerHTML={{ __html: selectedPost.content }} />
+                ) : (
+                  selectedPost.content.split('\n\n').map((paragraph, index) => {
+                    const trimmed = paragraph.trim();
+                    if (!trimmed) return null;
 
-                  // Handle subheadings starting with ###
-                  if (trimmed.startsWith('###')) {
+                    // Handle subheadings starting with ###
+                    if (trimmed.startsWith('###')) {
+                      return (
+                        <h3 key={index} className={styles.modalSubheading}>
+                          {trimmed.replace('###', '').trim()}
+                        </h3>
+                      );
+                    }
+
+                    // Handle bullet lists starting with -
+                    if (trimmed.startsWith('-')) {
+                      return (
+                        <ul key={index} className={styles.modalBulletList}>
+                          {trimmed.split('\n').map((item, itemIdx) => {
+                            const listItem = item.replace('-', '').trim();
+                            return listItem ? <li key={itemIdx}>{listItem}</li> : null;
+                          })}
+                        </ul>
+                      );
+                    }
+
+                    // Standard paragraphs
                     return (
-                      <h3 key={index} className={styles.modalSubheading}>
-                        {trimmed.replace('###', '').trim()}
-                      </h3>
+                      <p key={index} className={styles.modalParagraph}>
+                        {trimmed}
+                      </p>
                     );
-                  }
-
-                  // Handle bullet lists starting with -
-                  if (trimmed.startsWith('-')) {
-                    return (
-                      <ul key={index} className={styles.modalBulletList}>
-                        {trimmed.split('\n').map((item, itemIdx) => {
-                          const listItem = item.replace('-', '').trim();
-                          return listItem ? <li key={itemIdx}>{listItem}</li> : null;
-                        })}
-                      </ul>
-                    );
-                  }
-
-                  // Standard paragraphs
-                  return (
-                    <p key={index} className={styles.modalParagraph}>
-                      {trimmed}
-                    </p>
-                  );
-                })}
+                  })
+                )}
               </div>
             </motion.div>
           </div>

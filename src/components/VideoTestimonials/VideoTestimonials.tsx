@@ -6,6 +6,45 @@ import Link from 'next/link';
 import { createClient } from '@/utils/supabase/client';
 import styles from './VideoTestimonials.module.css';
 
+const getYoutubeEmbedUrl = (url: string): string | null => {
+  if (!url) return null;
+  
+  // Handle YouTube Shorts (portrait format)
+  if (url.includes('/shorts/')) {
+    const parts = url.split('/shorts/');
+    if (parts[1]) {
+      const id = parts[1].split(/[?&]/)[0];
+      return `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
+    }
+  }
+  
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+  const match = url.match(regExp);
+  if (match && match[2].length === 11) {
+    return `https://www.youtube.com/embed/${match[2]}?autoplay=1&rel=0`;
+  }
+  return null;
+};
+
+const getYoutubeThumbnailUrl = (url: string): string | null => {
+  if (!url) return null;
+  
+  if (url.includes('/shorts/')) {
+    const parts = url.split('/shorts/');
+    if (parts[1]) {
+      const id = parts[1].split(/[?&]/)[0];
+      return `https://img.youtube.com/vi/${id}/maxresdefault.jpg`;
+    }
+  }
+  
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+  const match = url.match(regExp);
+  if (match && match[2].length === 11) {
+    return `https://img.youtube.com/vi/${match[2]}/maxresdefault.jpg`;
+  }
+  return null;
+};
+
 interface TestimonialJourney {
   id: string;
   route: string;
@@ -25,7 +64,8 @@ interface VideoTestimonialsProps {
 }
 
 export default function VideoTestimonials({ showAllButton = true, featuredOnly = false }: VideoTestimonialsProps = {}) {
-  const [activeVideo, setActiveVideo] = useState<string | null>(null);
+  const [selectedTestimonial, setSelectedTestimonial] = useState<TestimonialJourney | null>(null);
+  const [activeVideoIndex, setActiveVideoIndex] = useState<number>(0);
   const [tripTestimonials, setTripTestimonials] = useState<TestimonialJourney[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -43,18 +83,26 @@ export default function VideoTestimonials({ showAllButton = true, featuredOnly =
       const { data, error } = await query;
       if (!error && data) {
         setTripTestimonials(
-          data.map((item: any) => ({
-            id: item.id,
-            route: item.route || item.title || 'Trip Journey',
-            distance: item.distance || 'Local/Outstation',
-            vehicle: item.vehicle || 'Premium Vehicle',
-            customer: item.customer || 'Customer',
-            initials: item.initials || 'C',
-            rating: item.rating || 5,
-            quote: item.quote || '“Wonderful travel experience!”',
-            thumbnail: item.thumbnail_url || '/images/video_thumb_placeholder.png',
-            videoUrl: item.video_url || ''
-          }))
+          data.map((item: any) => {
+            const firstVideoUrl = item.video_url ? item.video_url.split(',')[0].trim() : '';
+            const ytThumbnail = getYoutubeThumbnailUrl(firstVideoUrl);
+            const isMp4 = firstVideoUrl.toLowerCase().endsWith('.mp4') || firstVideoUrl.toLowerCase().endsWith('.webm');
+            
+            const autoThumbnail = ytThumbnail || (isMp4 ? firstVideoUrl : '/images/video_thumb_placeholder.png');
+
+            return {
+              id: item.id,
+              route: item.route || item.title || 'Trip Journey',
+              distance: item.distance || 'Local/Outstation',
+              vehicle: item.vehicle || 'Premium Vehicle',
+              customer: item.customer || 'Customer',
+              initials: item.initials || 'C',
+              rating: item.rating || 5,
+              quote: item.quote || '“Wonderful travel experience!”',
+              thumbnail: autoThumbnail,
+              videoUrl: item.video_url || ''
+            };
+          })
         );
       }
       setIsLoading(false);
@@ -62,12 +110,13 @@ export default function VideoTestimonials({ showAllButton = true, featuredOnly =
     loadTestimonials();
   }, [featuredOnly]);
 
-  const handleOpenVideo = (videoUrl: string) => {
-    setActiveVideo(videoUrl);
+  const handleOpenVideo = (item: TestimonialJourney) => {
+    setSelectedTestimonial(item);
+    setActiveVideoIndex(0);
   };
 
   const handleCloseVideo = () => {
-    setActiveVideo(null);
+    setSelectedTestimonial(null);
   };
 
   return (
@@ -91,16 +140,28 @@ export default function VideoTestimonials({ showAllButton = true, featuredOnly =
               <div 
                 key={item.id} 
                 className={styles.card}
-                onClick={() => handleOpenVideo(item.videoUrl)}
+                onClick={() => handleOpenVideo(item)}
               >
                 {/* Thumbnail with overlay & Play Button */}
                 <div className={styles.thumbnailWrapper}>
-                  <img 
-                    src={item.thumbnail} 
-                    alt={item.route} 
-                    className={styles.thumbnail}
-                    loading="lazy"
-                  />
+                  {item.thumbnail.toLowerCase().endsWith('.mp4') || item.thumbnail.toLowerCase().endsWith('.webm') ? (
+                    <video 
+                      src={item.thumbnail}
+                      className={styles.thumbnail}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      style={{ objectFit: 'cover' }}
+                    />
+                  ) : (
+                    <img 
+                      src={item.thumbnail} 
+                      alt={item.route} 
+                      className={styles.thumbnail}
+                      loading="lazy"
+                    />
+                  )}
                   <div className={styles.playOverlay}>
                     <div className={styles.playBtnCircle}>
                       {/* SVG Play Icon */}
@@ -214,7 +275,7 @@ export default function VideoTestimonials({ showAllButton = true, featuredOnly =
 
       {/* Video Modal Player Overlay */}
       <AnimatePresence>
-        {activeVideo && (
+        {selectedTestimonial && (
           <motion.div 
             className={styles.modalOverlay}
             initial={{ opacity: 0 }}
@@ -245,14 +306,90 @@ export default function VideoTestimonials({ showAllButton = true, featuredOnly =
                 </svg>
               </button>
 
-              {/* Video Player */}
-              <video 
-                src={activeVideo} 
-                className={styles.videoElement} 
-                controls 
-                autoPlay 
-                playsInline
-              />
+              {/* Left Column: Video Section */}
+              <div className={styles.videoSection}>
+                {(() => {
+                  const urls = selectedTestimonial.videoUrl
+                    ? selectedTestimonial.videoUrl.split(',').map((s) => s.trim()).filter(Boolean)
+                    : [];
+                  const activeUrl = urls[activeVideoIndex] || '';
+
+                  return (
+                    <>
+                      <div style={{ flex: 1, position: 'relative', width: '100%', minHeight: 0 }}>
+                        {getYoutubeEmbedUrl(activeUrl) ? (
+                          <iframe
+                            src={getYoutubeEmbedUrl(activeUrl)!}
+                            className={styles.videoElement}
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }}
+                          />
+                        ) : (
+                          <video 
+                            key={activeUrl}
+                            src={activeUrl} 
+                            className={styles.videoElement} 
+                            controls 
+                            autoPlay 
+                            playsInline
+                            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain' }}
+                          />
+                        )}
+                      </div>
+
+                      {/* Video Switching Tabs (Only shows if there are multiple videos!) */}
+                      {urls.length > 1 && (
+                        <div className={styles.videoTabs}>
+                          <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.4)', marginRight: '6px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                            Playlist ({urls.length}):
+                          </span>
+                          {urls.map((_, uIdx) => (
+                            <button
+                              key={uIdx}
+                              className={`${styles.videoTab} ${activeVideoIndex === uIdx ? styles.videoTabActive : ''}`}
+                              onClick={() => setActiveVideoIndex(uIdx)}
+                            >
+                              Video {uIdx + 1}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </>
+                  );
+                })()}
+              </div>
+
+              {/* Right Column: Text Details Section */}
+              <div className={styles.detailsSection}>
+                <h3 className={styles.modalRoute}>{selectedTestimonial.route}</h3>
+                
+                <div className={styles.modalMetaLine}>
+                  <span>{selectedTestimonial.distance}</span>
+                  <span style={{ color: 'rgba(255,255,255,0.2)' }}>•</span>
+                  <span>{selectedTestimonial.vehicle}</span>
+                </div>
+
+                <div className={styles.modalStars} style={{ marginBottom: '16px' }}>
+                  {Array.from({ length: selectedTestimonial.rating }).map((_, i) => (
+                    <span key={i}>★</span>
+                  ))}
+                </div>
+
+                <p className={styles.modalQuote}>{selectedTestimonial.quote}</p>
+
+                <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.08)', margin: '20px 0' }} />
+
+                <div className={styles.modalProfile}>
+                  <div className={styles.modalAvatar}>
+                    {selectedTestimonial.initials}
+                  </div>
+                  <div className={styles.modalProfileInfo}>
+                    <h4>{selectedTestimonial.customer}</h4>
+                    <span>Verified Rider</span>
+                  </div>
+                </div>
+              </div>
             </motion.div>
           </motion.div>
         )}

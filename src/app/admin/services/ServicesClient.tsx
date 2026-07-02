@@ -99,22 +99,45 @@ export default function ServicesClient({ userEmail }: { userEmail: string }) {
       label: 'Image',
       render: (item: any) => (
         item.image_url ? (
-          <img src={item.image_url} alt={item.title} style={{ width: '48px', height: '48px', objectFit: 'cover', borderRadius: '6px' }} />
+          <a href={item.image_url} target="_blank" rel="noreferrer" title="Click to view full image" style={{ display: 'block', cursor: 'zoom-in' }}>
+            <div style={{
+              width: '72px',
+              height: '45px',
+              borderRadius: '6px',
+              overflow: 'hidden',
+              border: '1px solid var(--admin-border)',
+              boxShadow: '0 2px 4px rgba(0,0,0,0.04)',
+              backgroundColor: '#f1f5f9',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
+              <img src={item.image_url} alt={item.title} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+            </div>
+          </a>
         ) : (
-          <span style={{ color: '#555' }}>No image</span>
+          <span style={{ color: 'var(--admin-text-secondary)', fontSize: '0.85rem' }}>No image</span>
         )
       )
     },
-    { key: 'title', label: 'Title' },
+    { 
+      key: 'title', 
+      label: 'Title',
+      render: (item: any) => (
+        <span style={{ fontWeight: 600, color: 'var(--admin-text-primary)', fontSize: '0.92rem' }}>
+          {item.title}
+        </span>
+      )
+    },
     {
       key: 'description',
       label: 'Description',
       render: (item: any) => {
-        // Strip HTML tags for preview and truncate to 50 chars
+        // Strip HTML tags for preview and truncate to 100 chars
         const plainText = item.description ? item.description.replace(/<[^>]+>/g, '') : '';
         return (
-          <span style={{ color: '#a0a0a0', fontSize: '0.9rem' }}>
-            {plainText.length > 50 ? plainText.substring(0, 50) + '...' : plainText}
+          <span style={{ color: 'var(--admin-text-secondary)', fontSize: '0.88rem', lineHeight: '1.5' }}>
+            {plainText.length > 90 ? plainText.substring(0, 90) + '...' : plainText}
           </span>
         );
       }
@@ -140,32 +163,26 @@ export default function ServicesClient({ userEmail }: { userEmail: string }) {
 
       {isEditing ? (
         <form onSubmit={handleSave} className={styles.form}>
-          <div className={styles.formGroup}>
-            <label>Service Image</label>
-            <ImageUpload 
-              bucket="media" 
-              folder="services" 
-              currentImage={currentItem.image_url}
-              onUploadSuccess={(url) => setCurrentItem({ ...currentItem, image_url: url })}
-            />
-          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px', alignItems: 'start', marginBottom: '8px' }}>
+            <div className={styles.formGroup}>
+              <label>Service Image</label>
+              <ImageUpload 
+                bucket="media" 
+                folder="services" 
+                currentImage={currentItem.image_url}
+                onUploadSuccess={(url) => setCurrentItem({ ...currentItem, image_url: url })}
+                dimensions="1200 x 630 px (Landscape)"
+              />
+            </div>
 
-          <div className={styles.formGrid}>
             <div className={styles.formGroup}>
               <label>Title</label>
               <input 
                 required 
+                maxLength={100}
                 value={currentItem.title} 
                 onChange={e => setCurrentItem({ ...currentItem, title: e.target.value })} 
-              />
-            </div>
-            <div className={styles.formGroup}>
-              <label>Icon SVG (Code)</label>
-              <textarea 
-                className={styles.textarea}
-                rows={3}
-                value={currentItem.icon_svg || ''} 
-                onChange={e => setCurrentItem({ ...currentItem, icon_svg: e.target.value })} 
+                placeholder="Enter service title (e.g. Tour Packages)"
               />
             </div>
           </div>

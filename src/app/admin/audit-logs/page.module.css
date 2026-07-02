@@ -11,17 +11,17 @@
 .header h1 {
   font-size: 2rem;
   margin-bottom: 8px;
-  color: #fff;
+  color: var(--admin-text-primary);
 }
 
 .header p {
-  color: #b0b7c3;
+  color: var(--admin-text-secondary);
   font-size: 1.1rem;
 }
 
 .errorCard {
-  background-color: rgba(255, 74, 74, 0.1);
-  border: 1px solid rgba(255, 74, 74, 0.2);
+  background-color: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.15);
   border-radius: 8px;
   padding: 32px;
   text-align: center;
@@ -29,13 +29,13 @@
 }
 
 .errorCard h2 {
-  color: #ff4a4a;
+  color: #dc2626;
   margin-top: 0;
   margin-bottom: 16px;
 }
 
 .errorCard p {
-  color: #e0e4eb;
+  color: var(--admin-text-secondary);
   font-size: 1.1rem;
 }
 
@@ -50,19 +50,19 @@
 }
 
 .create {
-  background-color: rgba(163, 255, 18, 0.1);
-  color: #a3ff12;
-  border: 1px solid rgba(163, 255, 18, 0.2);
+  background-color: var(--admin-accent-light);
+  color: var(--admin-accent);
+  border: 1px solid rgba(76, 122, 52, 0.15);
 }
 
 .update {
   background-color: rgba(56, 189, 248, 0.1);
-  color: #38bdf8;
-  border: 1px solid rgba(56, 189, 248, 0.2);
+  color: #0284c7;
+  border: 1px solid rgba(56, 189, 248, 0.15);
 }
 
 .delete {
-  background-color: rgba(255, 74, 74, 0.1);
-  color: #ff4a4a;
-  border: 1px solid rgba(255, 74, 74, 0.2);
+  background-color: rgba(239, 68, 68, 0.08);
+  color: #dc2626;
+  border: 1px solid rgba(239, 68, 68, 0.15);
 }

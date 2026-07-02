@@ -22,17 +22,19 @@ interface RichTextEditorProps {
   onChange: (html: string) => void;
 }
 
+const extensions = [
+  StarterKit,
+  Underline,
+  TextAlign.configure({ types: ['heading', 'paragraph'] }),
+  Link.configure({ openOnClick: false }),
+  Image.configure({ inline: true })
+];
+
 export default function RichTextEditor({ content, onChange }: RichTextEditorProps) {
   const [isPreview, setIsPreview] = useState(false);
 
   const editor = useEditor({
-    extensions: [
-      StarterKit,
-      Underline,
-      TextAlign.configure({ types: ['heading', 'paragraph'] }),
-      Link.configure({ openOnClick: false }),
-      Image.configure({ inline: true })
-    ],
+    extensions,
     content,
     onUpdate: ({ editor }) => {
       onChange(editor.getHTML());

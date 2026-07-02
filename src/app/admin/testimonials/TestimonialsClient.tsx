@@ -170,6 +170,7 @@ export default function TestimonialsClient({ userEmail }: { userEmail: string })
               folder="testimonials" 
               currentImage={currentItem.image_url}
               onUploadSuccess={(url) => setCurrentItem({ ...currentItem, image_url: url })}
+              dimensions="150 x 150 px (Square Avatar)"
             />
           </div>
 
@@ -178,6 +179,7 @@ export default function TestimonialsClient({ userEmail }: { userEmail: string })
               <label>Name</label>
               <input 
                 required 
+                maxLength={50}
                 value={currentItem.name} 
                 onChange={e => setCurrentItem({ ...currentItem, name: e.target.value })} 
               />
@@ -185,6 +187,7 @@ export default function TestimonialsClient({ userEmail }: { userEmail: string })
             <div className={styles.formGroup}>
               <label>Role / Company</label>
               <input 
+                maxLength={50}
                 value={currentItem.role || ''} 
                 onChange={e => setCurrentItem({ ...currentItem, role: e.target.value })} 
               />
@@ -208,6 +211,7 @@ export default function TestimonialsClient({ userEmail }: { userEmail: string })
               className={styles.textarea}
               rows={4}
               required
+              maxLength={500}
               value={currentItem.text} 
               onChange={e => setCurrentItem({ ...currentItem, text: e.target.value })} 
             />

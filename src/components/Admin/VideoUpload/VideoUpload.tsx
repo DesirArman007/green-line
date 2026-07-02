@@ -2,31 +2,38 @@
 
 import React, { useState } from 'react';
 import { createClient } from '@/utils/supabase/client';
-import styles from './ImageUpload.module.css';
+import styles from './VideoUpload.module.css';
 
-interface ImageUploadProps {
+interface VideoUploadProps {
   bucket: string;
   folder: string;
   onUploadSuccess: (publicUrl: string) => void;
   onUploadError?: (error: string) => void;
-  currentImage?: string | null;
+  currentVideo?: string | null;
   dimensions?: string;
 }
 
-export default function ImageUpload({
+export default function VideoUpload({
   bucket,
   folder,
   onUploadSuccess,
   onUploadError,
-  currentImage,
+  currentVideo,
   dimensions
-}: ImageUploadProps) {
+}: VideoUploadProps) {
   const [isUploading, setIsUploading] = useState(false);
   const supabase = createClient();
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
+
+    // Check size limit (max 50MB)
+    const fileSizeMB = file.size / (1024 * 1024);
+    if (fileSizeMB > 50) {
+      alert("Video file is too large. Max limit is 50MB.");
+      return;
+    }
 
     setIsUploading(true);
 
@@ -52,9 +59,9 @@ export default function ImageUpload({
       onUploadSuccess(publicUrl);
     } catch (error: any) {
       if (onUploadError) {
-        onUploadError(error.message || 'Error uploading image');
+        onUploadError(error.message || 'Error uploading video');
       } else {
-        alert(error.message || 'Error uploading image');
+        alert(error.message || 'Error uploading video');
       }
     } finally {
       setIsUploading(false);
@@ -63,41 +70,46 @@ export default function ImageUpload({
 
   return (
     <div className={styles.container}>
-      <div className={`${styles.uploadCard} ${currentImage ? styles.hasImage : ''}`}>
-        {currentImage ? (
+      <div className={`${styles.uploadCard} ${currentVideo ? styles.hasVideo : ''}`}>
+        {currentVideo ? (
           <div className={styles.previewArea}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={currentImage} alt="Uploaded preview" className={styles.previewImage} />
-             <div className={styles.previewOverlay}>
-              <div style={{ display: 'flex', gap: '8px', zIndex: 5 }}>
-                <a href={currentImage} target="_blank" rel="noreferrer" className={styles.viewBtn}>
-                  View Full Image
+            <video 
+              src={currentVideo} 
+              className={styles.previewVideo} 
+              muted 
+              loop 
+              autoPlay 
+              playsInline 
+            />
+            <div className={styles.previewOverlay}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', alignItems: 'center', zIndex: 5 }}>
+                <a href={currentVideo} target="_blank" rel="noreferrer" className={styles.viewBtn}>
+                  Play Full Video
                 </a>
-                <label htmlFor={`file-upload-replace-${folder}`} className={styles.changeLabel}>
-                  {isUploading ? 'Uploading...' : 'Replace Image'}
+                <label htmlFor={`video-upload-replace-${folder}`} className={styles.changeLabel}>
+                  {isUploading ? 'Uploading...' : 'Replace Video'}
                 </label>
               </div>
               <input
                 type="file"
-                accept="image/*"
+                accept="video/*"
                 onChange={handleFileChange}
                 disabled={isUploading}
                 className={styles.fileInput}
-                id={`file-upload-replace-${folder}`}
+                id={`video-upload-replace-${folder}`}
               />
             </div>
           </div>
         ) : (
           <div className={styles.dropzone}>
             <svg className={styles.uploadIcon} width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <polyline points="17 8 12 3 7 8" />
-              <line x1="12" y1="3" x2="12" y2="15" />
+              <polygon points="23 7 16 12 23 17 23 7" />
+              <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
             </svg>
             <span className={styles.dropzoneText}>
-              {isUploading ? 'Uploading image...' : 'Click to upload image'}
+              {isUploading ? 'Uploading video...' : 'Click to upload video'}
             </span>
-            <span className={styles.dropzoneSubtext}>PNG, JPG, or WEBP (Max 5MB)</span>
+            <span className={styles.dropzoneSubtext}>MP4 or WebM (Max 50MB)</span>
             {dimensions && (
               <span className={styles.dropzoneDimensions}>
                 Recommended: {dimensions}
@@ -105,13 +117,13 @@ export default function ImageUpload({
             )}
             <input
               type="file"
-              accept="image/*"
+              accept="video/*"
               onChange={handleFileChange}
               disabled={isUploading}
               className={styles.fileInput}
-              id={`file-upload-${folder}`}
+              id={`video-upload-${folder}`}
             />
-            <label htmlFor={`file-upload-${folder}`} className={styles.hiddenLabel} />
+            <label htmlFor={`video-upload-${folder}`} className={styles.hiddenLabel} />
           </div>
         )}
       </div>
